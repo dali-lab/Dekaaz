@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "DekaazApp": {
+            "applicationId": "m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", 
+            "masterKey": "hh0YHOc3lyQbFSwZ71eWDZxaVkm87uQLOeS0q86B"
+        }, 
+        "_default": {
+            "link": "DekaazApp"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.16"
+    }
+}
