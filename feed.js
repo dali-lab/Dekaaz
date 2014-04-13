@@ -537,6 +537,9 @@ $(document).ready(function() {
 	// console.log("Array of words: ");
 	// console.log(str);
 	var num = 0;
+
+	var dict = {};
+
 	for(var k = 0; k<str.length; k++) {
 		/* individ_word: a single word in the str array, after cutting out whitespace characters (tabs, new line characters, etc) */
 		var individ_word = str[k].replace(/\s+/g, "");
@@ -556,12 +559,12 @@ $(document).ready(function() {
 		*/
 		var urlWordnik = "http://api.wordnik.com:80/v4/word.json/" + individ_word + "/hyphenation?useCanonical=false&limit=50&api_key=ce29061c70e7717832853064a0d05a221520eb145cb41d00e";
 		//alert(urlWordnik);
-		var eh = $.ajax({
+		$.ajax({
 	        type: 'GET',
 	        url: urlWordnik,
 	        dataType: 'json',
 	        success: function (data) {
-	        	console.log(data);
+	        	// console.log(data);
 	        	/* The response from Wordnik is a json object, essentially an array with each index representing a syllable.
 	        	Unfortunately, the json object does not contain the entire word (only the syllables), and ajax requests do not return
 	        	results in the order the requests were sent. For example, if we ask for the syllables for "world", "hello", and "yen",
@@ -576,20 +579,50 @@ $(document).ready(function() {
 				for Wordnik. In this case, the sylls array will not hold a syllable count for "afterlife". We see how we handle
 				this case later.
 	        	*/
+
 	        	if(data.length != 0) {
+	        		var found_syll_word = 0;
+		        	
+		        	for(var l = 0; l<str.length; l++) {
+		        		var dekaaz_word = "";
+		        		for(var k = 0; k<data.length; k++) {
+		        			dekaaz_word += data[k].text.toLowerCase();
+		        		}
 
-		        	for(var m = 0; m<str.length; m++) {
-
-		        		/* something is wrong here; str[m] is nothing sometimes... */
-		        		// console.log("syllables");
-		        		// console.log(str[m].toLowerCase().indexOf(data[0].text.toLowerCase()));
-		        		// console.log(str[m].toLowerCase());
-		        		// console.log(data[0].text.toLowerCase());
-		        		if(str[m].toLowerCase().indexOf(data[0].text.toLowerCase()) != -1) {
-		        			sylls[m] = data.length;
+		        		// console.log("dekaaz word");
+		        		// console.log(dekaaz_word);
+		        		// console.log("data");
+		        		// console.log(data);
+		        		if(dekaaz_word === str[l]) {
+		        			// console.log("HEEE");
+		        			found_syll_word = 1;
+		        			dict[str[l].toLowerCase()] = data.length;
+		        			break;
 		        		}
 		        	}
-	        	}
+
+		        }
+
+	        	// console.log(dict);
+	        	// 	if(str[l].toLowerCase().indexOf(data[0].text.toLowerCase()) != -1) {
+	        	// 		sylls[m] = data.length;
+	        	// 	}
+	        	// }
+
+	        	// if(data.length != 0) {
+
+		        // 	for(var m = 0; m<str.length; m++) {
+
+		        // 		/* something is wrong here; str[m] is nothing sometimes... */
+		        // 		// console.log("syllables");
+		        // 		// console.log(str[m].toLowerCase().indexOf(data[0].text.toLowerCase()));
+		        // 		// console.log(str[m].toLowerCase());
+		        // 		// console.log(data[0].text.toLowerCase());
+		        // 		if(str[m].toLowerCase().indexOf(data[0].text.toLowerCase()) != -1) {
+		        // 			sylls[m] = data.length;
+		        // 		}
+		        // 	}
+	        	// }
 	        	
 	        	num++;
 	        	/* Eventually, num will reach 5, the size of str, in which case we have all the syllable counts.
@@ -600,12 +633,19 @@ $(document).ready(function() {
 	        		then we call our new_count helper method to count the syllables for the 
 	        		word. */
 	        	if(num == str.length) {
-	            	for(var l = 0; l<str.length; l++) {
-	            		if(sylls[l] == null) {
-	            			sylls[l] = new_count(str[l]);
-	            			// alert("THIS HAPPENS");
-	            		}
-	            	}
+	        		console.log("Got to last word");
+	        		for(var l = 0; l<str.length; l++) {
+
+	        			if(sylls[l] == 0) {
+	        				continue;
+	        			}
+	        			if(dict[str[l]] == null) {
+	        				sylls[l] = new_count(str[l]);
+	        			} else {
+	        				sylls[l] = dict[str[l]];
+	        			}
+	        		}
+
 	            	$("#syll_count").html('<div style="width: 100%;">The syllables for each word are: ' + 
 	            		sylls.slice(1, sylls.length - 1).toString() + '</div>');
 	            	// alert(sylls.toString());
