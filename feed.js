@@ -1,5 +1,26 @@
 Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8jzS98f3yVLTtza17J2zqGBx");
 
+var soundFile;
+
+ function croakCallbackFunction(croak_id,croakmp3source,callbackCode)
+ {
+    if(callbackCode==1){
+           // alert('talk_id '+croak_id);
+           var str = '<audio controls><source src="' + croakmp3source + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
+           // alert("HI");
+           soundFile = croakmp3source;
+		   $('#audio').html(str);
+           // alert("HEY??");
+        //    var audio = $("audio");
+        //    audio[0].pause();
+    	   // audio[0].load();
+        //    // $('audio').show();
+        //    audio[0].play();
+        //    alert("HERE");
+           // alert('talkmp3source '+croakmp3source);
+    }
+ }
+
 function logoutFunc() {
 	$("#logout-button").attr("disabled", "disabled");
 
@@ -180,16 +201,28 @@ YUI().use('node', function(Y) {
 	});
 
 	function populate(val, owner_param, owner_id_param) {
-		var content = Y.Lang.sub(Y.one('#todo-items-template').getHTML(), {
-			line1: val.get('line1'),
-			line2: val.get('line2'),
-			line3: val.get('line3'),
-			owner: owner_param,
-			owner_id: owner_id_param,
-			createdAt: val.get('createdAt'),
-			id: val.id,
-		});
-		incompleteItemList.prepend(content);
+
+		if(owner_id_param == null) {
+			var content = Y.Lang.sub(Y.one('#todo-items-template-no-account').getHTML(), {
+				line1: val.get('line1'),
+				line2: val.get('line2'),
+				line3: val.get('line3'),
+				owner: owner_param,
+				createdAt: val.get('createdAt'),
+			});
+			incompleteItemList.prepend(content);
+		} else {
+			var content = Y.Lang.sub(Y.one('#todo-items-template').getHTML(), {
+				line1: val.get('line1'),
+				line2: val.get('line2'),
+				line3: val.get('line3'),
+				owner: owner_param,
+				owner_id: owner_id_param,
+				createdAt: val.get('createdAt'),
+				id: val.id,
+			});
+			incompleteItemList.prepend(content);
+		}
 
 		// The following three variables are arrays of integers that hold the syllable
 		// counts for each word of each line of the Dekaaz
@@ -235,22 +268,22 @@ YUI().use('node', function(Y) {
 			  	console.log(results);
 			  	incompleteItemList.empty();
 			  	Y.Array.each(results, function(val, i, arr) {
-			  		console.log("results length");
-			  		console.log(results.length);
+			  		// console.log("results length");
+			  		// console.log(results.length);
 			  		var author = val.get('parent');
 			  		// console.log(author.getUsername() + " ; " + author.id);
 			  		if(author != null) {
 				  		author.fetch({
 						  success: function(author) {
 						    var author_name = author.getUsername();
-						  	populate(val, "author: " + author.getUsername(), author.id);
+						  	populate(val, author.getUsername(), author.id);
 						  	if(i == results.length - 1) {
 								paginateDekaazs(results.length);
 							}
 						  }
 						});
 					} else {
-						populate(val, "author: Unknown", author.id);
+						populate(val, "Unknown", null);
 						if(i == results.length - 1) {
 							paginateDekaazs(results.length);
 						}
@@ -338,6 +371,7 @@ YUI().use('node', function(Y) {
 		dekaazPoem.set("line1syll", decomposed_array[0]);
 		dekaazPoem.set("line2syll", decomposed_array[1]);
 		dekaazPoem.set("line3syll", decomposed_array[2]);
+		dekaazPoem.set("Sound", soundFile);
 		// console.log(decomposed_array[0]);
 		// console.log(decomposed_array[1]);
 		// console.log(decomposed_array[2]);
@@ -361,12 +395,11 @@ YUI().use('node', function(Y) {
 				if(Parse.User.current() != null) {
 					console.log(Parse.User.current().get("username"));
 					owner_name = Parse.User.current().getUsername();
-					// console.log("befre");
-					// console.log(owner_name);
+					populate(item, owner_name, Parse.User.current().id);
 				} else {
 					owner_name = "Unknown";
+					populate(item, owner_name, null);
 				}
-				populate(item, owner_name, Parse.User.current().id);
 
 				input1.set('value', '').focus();
 				input2.set('value', '').focus();
@@ -399,7 +432,7 @@ YUI().use('node', function(Y) {
 						  success: function(author) {
 						    var author_name = author.getUsername();
 
-						    populate(val, "author: " + author_name, author.id);
+						    populate(val, author_name, author.id);
 
 
 							attachUserLinks();
@@ -409,7 +442,7 @@ YUI().use('node', function(Y) {
 						  }
 						});
 					} else {
-						populate(val, "author: Unknown", author.id);
+						populate(val, "Unknown", null);
 						attachUserLinks();
 						if(i == results.length - 1) {
 							paginateDekaazs(results.length);
