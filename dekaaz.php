@@ -13,6 +13,7 @@
   <script type="text/javascript" src="croakit.js"></script>
   <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
   <script type="text/javascript" src="parse.js"></script>
+  <script type="text/javascript" src="dekaaz.js"></script>
   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="processing.js"></script>
 <link href="css/twitter-bootstrap.css" rel="stylesheet">
@@ -165,19 +166,19 @@ ul { padding: 0; }
 </head>
 
 <body style="background-color: white !important;">
-	<div id="fb-root"></div>
-	<script src="//connect.facebook.net/en_US/all.js"></script> 
+  <div id="fb-root"></div>
+  <script src="//connect.facebook.net/en_US/all.js"></script> 
     <script>
     Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8jzS98f3yVLTtza17J2zqGBx");
 
       window.fbAsyncInit = function() {
         Parse.FacebookUtils.init({
-		    appId      : '520144374763187', // Facebook App ID
-		    channelUrl : 'http://localhost:8888/dekaaz', // Channel File
-		    status     : true, // check login status
-		    cookie     : true, // enable cookies to allow Parse to access the session
-		    xfbml      : true  // parse XFBML
-		});
+        appId      : '520144374763187', // Facebook App ID
+        channelUrl : 'http://localhost:8888/dekaaz', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow Parse to access the session
+        xfbml      : true  // parse XFBML
+    });
       };
 
         FB.init({
@@ -199,9 +200,9 @@ ul { padding: 0; }
 
     </script>
   <!-- 
-	The following script code generates the top navigation bar, with "About", "Compose", and "Log Out" buttons
-	on the left, and a greeting on the right.
-	The code is executed when the user logs in, and is redirected to this page. Look at the "Top Navigation Bar" section in "feed.js" file to see the actual code.
+  The following script code generates the top navigation bar, with "About", "Compose", and "Log Out" buttons
+  on the left, and a greeting on the right.
+  The code is executed when the user logs in, and is redirected to this page. Look at the "Top Navigation Bar" section in "feed.js" file to see the actual code.
   -->
   <!--<script id="account-info" type="x/handlebars"><div style="text-align: right; width: 620px; margin: auto; background: white; padding: 0px 0px;"><div class="left" style="text-align: left !important;"><a href="about.html">About</a> | <a href="index.html" >Compose</a> | <a href="signup.html" id="logout-button">Log Out</a></div><div class="right">Welcome, {username}! </div></div></script>-->
 <!-- dropdown menu code from: http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-dropdowns.php -->
@@ -232,123 +233,4 @@ ul { padding: 0; }
     <li class="dropdown pull-right"><a>{greeting}</a></li>
 </ul></div>
 </script>
-
-
-  <h1><img src="images/dekaaz.png" style="padding-top: 10px; height: auto; max-width: 400px;"/></h1>
-  <div id="main" style="background-color: #F5F5F5; margin-bottom: 20px;">
-		
-		<div id="input-wrapper">
-			<!-- Everything wrapped inside the "dekaaz-maker" div specifies the input boxes into which the user can enter their dekaaz. Once the "poem-submit" button is clicked, the Dekaaz is saved to the Parse Database. Refer to "Dekaaz Saved to Database" section in "feed.js" to see how this is done. 
-
-			As the user types words into the input fields, there will be real-time updates in the "syll_count" div, giving the user feedback on how many syllables he/she has used so far. Refer to: "Syllable Counting Using Wordnik" section in the "feed.js" file for the code for syllable counting.
-			-->
-			<div id="dekaaz-maker" style="width: 100%; height: 150px;">
-			
-				<div style="width: 50%; margin-left: 10px; float: left !important; display: inline;">
-					<input type="text" id="poem-input-1" placeholder="Two Syllables" class="lines">
-			
-					<input type="text" id="poem-input-2" placeholder="Three Syllables" class="lines">
-			
-					<input type="text" id="poem-input-3" placeholder="Five Syllables" class="lines">
-					<br/>
-				</div>
-			
-				<div style="width: 40%; float: right !important; display: inline; text-align: right;" id="syll_count">0 syllables
-				</div>
-		
-			</div>
-			<div>
-        <div class="croaker" croakcb="1"></div>
-        <br/>
-				<input style="text-align: left !important;" type="button" id="poem-submit" value="Add">
-				<br/>
-
-        <div id="audio"></div>
-				<h2>Shared Dekaaz:</h2>
-
-
-
-	
-		<!-- HTML for SEARCH BAR; the Javascript for loading the results of the search can be found in "feed.js" under "Search Dekaazs" section -->
-		<form style="width: 100%;" id="tfnewsearch" method="get" class="dekaaz_search" >
-		        <input style="width: 80%;" type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton" style="border-right:solid 1px black; border: solid 1px black !important; width: 20%;">
-		</form>
-	
-	
-
-
-
-			<!-- this <ul> tag is populated with the entire listing of Dekaazs (look at "Dekaaz Listing" section in the "feed.js" file), or, if the Search button is clicked, this <ul> tag is populated with the search results (look at "Search Dekaazs" section in the "feed.js" file) using Javascript. The HTML for the Dekaaz's can be seen in the "todo-items-template" script seen immediately after the <ul> tag. -->
-			<ul id="incomplete-items">
-				<li id="no-incomplete-message">There are no Dekaaz yet. Consider writing one!</li>
-			</ul>
-
-            <script id="todo-items-template" type="x/handlebars">
-        <li class="list-item" style="display: none;" id="{id}">
-
-        <!--<input type="checkbox" id="{id}">-->
-        
-        <div style="display: inline-block; width: 47%; ">
-        {line1}<br/>{line2}<br/>{line3}<br/>Author: <a id="{owner_id}" class="user">{owner}</a><br/>
-        <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-        <audio controls><source src="{audio}" type="audio/mpeg">Your browser does not support this audio format.</audio>
-        </div>
-        <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
-        <img src="images/form.png" style="max-height: 100px; max-width: 100px; float: right;"/>
-
-        </div>
-        
-        </li>
-      </script>
-      <script id="todo-items-template-no-account" type="x/handlebars">
-        <li class="list-item" style="display: none;" id="{id}">
-        
-        <div style="display: inline-block; width: 47%; ">
-        {id} {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/><audio controls><source src="{audio}" type="audio/mpeg">Your browser does not support this audio format.</audio>
-        </div>
-        <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
-        <img src="images/form.png" style="max-height: 100px; max-width: 100px; float: right;"/>
-
-        </div>
-        
-        </li>
-      </script>
-
-			<!--<img src="Logo.png" style="max-height: 100px; max-width: 100px; "/>-->
-		</div>
-	
-  </div>
-		<!--<div id="example"></div>-->
-<div class="pagination pagination-centered" style="width:100%;">
-        <ul style="width:100%;">
-
-        </ul>
-</div>    
-	<!-- The feed that contains all the parse JS stuff, keys, etc-->
-	<script type="text/javascript" src="feed.js">
-	</script>
-	<script id="bottom_paginator" type="x/handlebars">
-
-          <li class="active"><a href="#">10</a></li>
-          <li class="disabled"><a href="#">...</a></li>
-          <li><a href="#">20</a></li>
-
-</script>
-<!--<div class="pagination-centered">
-  <ul class="pagination">
-    <li class="arrow unavailable"><a href="">&laquo;</a></li>
-    <li class="current"><a href="">1</a></li>
-    <li><a href="">2</a></li>
-    <li><a href="">3</a></li>
-    <li><a href="">4</a></li>
-    <li class="unavailable"><a href="">&hellip;</a></li>
-    <li><a href="">12</a></li>
-    <li><a href="">13</a></li>
-    <li class="arrow"><a href="">&raquo;</a></li>
-  </ul>
-</div>-->
-
-	<!--<div style="float: center; "><a href="about.html">About</a> | <a href="index.html" >Create a Dekaaz</a> | <a href="signup.html">Sign Up</a> </div>-->
 </body>
-
-</html>

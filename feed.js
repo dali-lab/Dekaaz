@@ -18,6 +18,7 @@ var soundFile;
         //    audio[0].play();
         //    alert("HERE");
            // alert('talkmp3source '+croakmp3source);
+
     }
  }
 
@@ -209,6 +210,8 @@ YUI().use('node', function(Y) {
 				line3: val.get('line3'),
 				owner: owner_param,
 				createdAt: val.get('createdAt'),
+				audio: val.get('Sound'),
+				id: val.id,
 			});
 			incompleteItemList.prepend(content);
 		} else {
@@ -219,6 +222,7 @@ YUI().use('node', function(Y) {
 				owner: owner_param,
 				owner_id: owner_id_param,
 				createdAt: val.get('createdAt'),
+				audio: val.get('Sound'),
 				id: val.id,
 			});
 			incompleteItemList.prepend(content);
