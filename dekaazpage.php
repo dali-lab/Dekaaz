@@ -12,7 +12,7 @@
 {line1}<br/>{line2}<br/>{line3}<br/>Author: <a id="{owner_id}" class="user">{owner}</a><br/>
 <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 <audio controls><source src="{audio}" type="audio/mpeg">Your browser does not support this audio format.</audio>
-</div>
+<br/></div>
 <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
 <img src="images/form.png" style="max-height: 100px; max-width: 100px; float: right;"/>
 
@@ -33,6 +33,10 @@
 
 </li>
 </script>
+
+<div class="fb-like" data-href="http://localhost:8888/dekaaz/dekaazpage.php?dekaaz_id=<?php
+	echo $_GET['dekaaz_id'];
+?>" data-width="450" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 
 
 <script>
