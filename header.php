@@ -210,6 +210,7 @@ ul { padding: 0; }
 <script id="account-info" type="x/handlebars">
 <div id="top-bar" style="text-align: right; width: 600px; margin: auto; background: white; padding: 0px 0px;"><ul class="nav nav-pills" style="margin-top: 5px;">
     <li><a href="about.html">About</a></li>
+    <li><a href="dekaaz.php" >Dekaaz</a></li>
     <li class="active"><a href="index.html" >Compose</a></li>
     <li><a href="#" onClick="logoutFunc()" id="logout-button">{message}</a></li>
     <li class="dropdown">
