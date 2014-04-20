@@ -26,7 +26,7 @@
     <script id="todo-items-template-no-account" type="x/handlebars">
       <li class="list-item" style="display: none;">
       <div style="display: inline-block; width: 47%; ">
-      {id} {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/>
+      {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/>
       {audio}
       <br/><a href="dekaazpage.php?dekaaz_id={id}">GO TO PAGE</a></div>
       <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">

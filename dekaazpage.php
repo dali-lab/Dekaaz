@@ -24,7 +24,7 @@
 <li class="list-item" id="{id}">
 
 <div style="display: inline-block; width: 47%; ">
-{id} {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/>
+{line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/>
 {audio}
 </div>
 <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
