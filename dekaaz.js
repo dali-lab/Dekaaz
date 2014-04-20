@@ -227,17 +227,30 @@ YUI().use('node', function(Y) {
 	function populate(val, owner_param, owner_id_param) {
 
 		if(owner_id_param == null) {
+			var audioHTML;
+			if(val.get('Sound') != null) {
+				audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
+			} else {
+				audioHTML = 'NO AUDIO AVAILABLE';
+			}
+			
 			var content = Y.Lang.sub(Y.one('#todo-items-template-no-account').getHTML(), {
 				line1: val.get('line1'),
 				line2: val.get('line2'),
 				line3: val.get('line3'),
 				owner: owner_param,
 				createdAt: val.get('createdAt'),
-				audio: val.get('Sound'),
+				audio: audioHTML,
 				id: val.id,
 			});
 			incompleteItemList.prepend(content);
 		} else {
+			var audioHTML;
+			if(val.get('Sound') != null) {
+				audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
+			} else {
+				audioHTML = 'NO AUDIO AVAILABLE';
+			}
 			var content = Y.Lang.sub(Y.one('#todo-items-template').getHTML(), {
 				line1: val.get('line1'),
 				line2: val.get('line2'),
@@ -245,7 +258,7 @@ YUI().use('node', function(Y) {
 				owner: owner_param,
 				owner_id: owner_id_param,
 				createdAt: val.get('createdAt'),
-				audio: val.get('Sound'),
+				audio: audioHTML,
 				id: val.id,
 			});
 			incompleteItemList.prepend(content);

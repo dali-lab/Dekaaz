@@ -1,7 +1,7 @@
 <?php include_once("header.php"); ?>
 
     <ul id="incomplete-items">
-      <li id="no-incomplete-message">There are no Dekaaz yet. Consider writing one!</li>
+      <li id="no-incomplete-message"></li>
     </ul>
 
     <script id="todo-items-template" type="x/handlebars">
@@ -12,7 +12,7 @@
       <div style="display: inline-block; width: 47%; ">
       {line1}<br/>{line2}<br/>{line3}<br/>Author: <a id="{owner_id}" class="user">{owner}</a><br/>
       <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-      <audio controls><source src="{audio}" type="audio/mpeg">Your browser does not support this audio format.</audio>
+      {audio}
       <br/><a href="dekaazpage.php?dekaaz_id={id}">GO TO PAGE</a></div>
       <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
       
@@ -26,7 +26,8 @@
     <script id="todo-items-template-no-account" type="x/handlebars">
       <li class="list-item" style="display: none;">
       <div style="display: inline-block; width: 47%; ">
-      {id} {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/><audio controls><source src="{audio}" type="audio/mpeg">Your browser does not support this audio format.</audio>
+      {id} {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/>
+      {audio}
       <br/><a href="dekaazpage.php?dekaaz_id={id}">GO TO PAGE</a></div>
       <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
       

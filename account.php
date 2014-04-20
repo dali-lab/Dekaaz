@@ -50,7 +50,7 @@ YUI().use('node', function(Y) {
           });
 // });
 
-  // YUI().use('node', function(Y) {
+  
       var q = new Parse.Query("User");
       q.get(getCookie("user_account"), {
         success: function(curr_user) {

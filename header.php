@@ -15,7 +15,7 @@
   <script type="text/javascript" src="croakit.js"></script>
   <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
   <script type="text/javascript" src="parse.js"></script>
-  <script type="text/javascript" src="dekaaz.js"></script>
+
   <script type="text/javascript" src="processing.js"></script>
 <link href="css/twitter-bootstrap.css" rel="stylesheet">
 

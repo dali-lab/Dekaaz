@@ -11,7 +11,7 @@
 <div style="display: inline-block; width: 47%; ">
 {line1}<br/>{line2}<br/>{line3}<br/>Author: <a id="{owner_id}" class="user">{owner}</a><br/>
 <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-<audio controls><source src="{audio}" type="audio/mpeg">Your browser does not support this audio format.</audio>
+{audio}
 <br/></div>
 <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
 <img src="images/form.png" style="max-height: 100px; max-width: 100px; float: right;"/>
@@ -24,7 +24,8 @@
 <li class="list-item" id="{id}">
 
 <div style="display: inline-block; width: 47%; ">
-{id} {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/><audio controls><source src="{audio}" type="audio/mpeg">Your browser does not support this audio format.</audio>
+{id} {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/>
+{audio}
 </div>
 <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
 <img src="images/form.png" style="max-height: 100px; max-width: 100px; float: right;"/>
@@ -53,19 +54,30 @@
 	function populate(val, owner_param, owner_id_param) {
 		incompleteItemList.empty();
 		if(owner_id_param == null) {
-			
+			var audioHTML;
+			if(val.get('Sound') != null) {
+				audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
+			} else {
+				audioHTML = 'NO AUDIO AVAILABLE';
+			}
+
 			var content = Y.Lang.sub(Y.one('#todo-items-template-no-account').getHTML(), {
 				line1: val.get('line1'),
 				line2: val.get('line2'),
 				line3: val.get('line3'),
 				owner: owner_param,
 				createdAt: val.get('createdAt'),
-				audio: val.get('Sound'),
+				audio: audioHTML,
 				id: val.id,
 			});
 			incompleteItemList.prepend(content);
 		} else {
-			
+			var audioHTML;
+			if(val.get('Sound') != null) {
+				audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
+			} else {
+				audioHTML = 'NO AUDIO AVAILABLE';
+			}
 			var content = Y.Lang.sub(Y.one('#todo-items-template').getHTML(), {
 				line1: val.get('line1'),
 				line2: val.get('line2'),
@@ -73,7 +85,7 @@
 				owner: owner_param,
 				owner_id: owner_id_param,
 				createdAt: val.get('createdAt'),
-				audio: val.get('Sound'),
+				audio: audioHTML,
 				id: val.id,
 			});
 

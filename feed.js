@@ -5,19 +5,11 @@ var soundFile;
  function croakCallbackFunction(croak_id,croakmp3source,callbackCode)
  {
     if(callbackCode==1){
-           // alert('talk_id '+croak_id);
+           
            var str = '<audio controls><source src="' + croakmp3source + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
-           // alert("HI");
+           
            soundFile = croakmp3source;
 		   $('#audio').html(str);
-           // alert("HEY??");
-        //    var audio = $("audio");
-        //    audio[0].pause();
-    	   // audio[0].load();
-        //    // $('audio').show();
-        //    audio[0].play();
-        //    alert("HERE");
-           // alert('talkmp3source '+croakmp3source);
 
     }
  }
@@ -92,16 +84,8 @@ function goToPreviousPage() {
 }
 
 function goToAfterPage(maxnum) {
-	// alert(maxnum);
 	var num = parseInt($('.active:last').attr('id'));
-	// alert(maxnum);
-	// alert(num);
-	// alert(num+1 <= maxnum);
-	// alert(num+1);
-	// alert(maxnum);
 	if(num+1 <= maxnum) {
-		// alert(maxnum);
-		// alert(num+1);
 		goToPage(num+1);
 	}
 }
@@ -156,18 +140,9 @@ YUI().use('node', function(Y) {
 		var currentUser = Parse.User.current();
 		
 		var name;
-		// alert(currentUser);
 		if (currentUser) {
 			var username;
-			// alert("first");
-			// alert(Parse.FacebookUtils.isLinked(currentUser));
 			if(Parse.FacebookUtils.isLinked(currentUser)) {
-			// alert(currentUser.get("authData"));
-			// alert(currentUser.get("authData").facebook);
-			
-			// if(currentUser.get("authData") !== undefined 
-			// 	&& currentUser.get("authData").facebook !== undefined) {
-				// alert("1");
 				FB.getLoginStatus(function(response) {
 				  if (response.status != 'connected') {
 				  	Parse.User.logOut();
@@ -324,11 +299,6 @@ YUI().use('node', function(Y) {
 		solution[1] = new Array();
 		solution[2] = new Array();
 
-		// var indexOne = -1;
-		// var indexTwo = -1;
-		// var indexThree = -1;
-
-		// var counter = 2;
 
 		for (var i=0;i<syll_arr.length;i++)
 		{ 
@@ -356,18 +326,7 @@ YUI().use('node', function(Y) {
 		var Dekaaz = Parse.Object.extend("Dekaaz");
 		var dekaazPoem = new Dekaaz();
 		
-		
-		/*
-		//Old code from the NetTuts Parse todo tutorial	
-		var text = Y.one('#list-input').get('value');
-		var ListItem = Parse.Object.extend("ListItem");
-		var listItem = new ListItem();
-		
-		listItem.set("content", text);
-		listItem.set("isComplete", false);
-		*/
 
-		//Set the 
 		dekaazPoem.set("line1", textLine1);
 		dekaazPoem.set("line2", textLine2);
 		dekaazPoem.set("line3", textLine3);
@@ -376,9 +335,6 @@ YUI().use('node', function(Y) {
 		dekaazPoem.set("line2syll", decomposed_array[1]);
 		dekaazPoem.set("line3syll", decomposed_array[2]);
 		dekaazPoem.set("Sound", soundFile);
-		// console.log(decomposed_array[0]);
-		// console.log(decomposed_array[1]);
-		// console.log(decomposed_array[2]);
 
 		if(Parse.User.current() != null) {
 			dekaazPoem.set("parent", Parse.User.current());
@@ -453,43 +409,8 @@ YUI().use('node', function(Y) {
 						}
 					}
 
-
-
-
-				// var content = Y.Lang.sub(Y.one('#todo-items-template').getHTML(), {
-				// 	// content: val.get('content'),
-
-				// 	line1: val.get('line1'),
-				// 	line2: val.get('line2'),
-				// 	line3: val.get('line3'),
-				// 	createdAt: val.get('createdAt'),
-				// 	// author: val.get('author'),
-
-				// 	id: val.id,
-				// });
-				// incompleteItemList.prepend(content);
 			});
 			
-			//When the checkbox is clicked for any of the items in the incomplete list, update it as complete.
-			// incompleteItemList.delegate('click', function (e) {
-			// 	var self = this;
-			// 	query = new Parse.Query(ListItem);
-			// 	query.get(self.one('input').get('id'), {
-			// 	  success: function(item) {
-			// 	    item.set('isComplete', true);
-			// 			item.save();
-			// 			self.remove();
-
-			// 			if (incompleteItemList.all('li').size() >= 1) {
-			// 				noTasksMessage.removeClass('hidden');
-			// 			}
-						
-			// 	  },
-			// 	  error: function(object, error) {
-			// 			alert("Error when updating todo item: " + error.code + " " + error.message);
-			// 	  }
-			// 	});
-			// }, 'li');
 	  },
 	  error: function(error) {
 	    alert("Error when retrieving Todos: " + error.code + " " + error.message);
@@ -497,29 +418,6 @@ YUI().use('node', function(Y) {
 	});
 	
 });
-
-//I used http://stackoverflow.com/questions/15560920/ajax-text-input-value-from-php-function as a reference
-
-
-
-// var obj = {"name": "value"}
-// var jsonstr = JSON.stringify(obj);
-// alert(jsonstr);
-// $(".lines").keyup(function() {
-
-//   	$.ajax({
-//         type: 'POST',
-//         url: "syllables.php",
-//         data: {input1 : $("#poem-input-1").val(), input2 : $("#poem-input-2").val(), input3 : $("#poem-input-3").val()},
-//         dataType: 'HTML',
-//         success: function (data) {
-//             $("#syll_count").html(data);
-            
-//         },
-//         error: function(req, err){ console.log('my message' + err); }
-//     });
-
-// });
 
 /* 
 Helper method for counting syllables in the parameter, word.
@@ -571,8 +469,7 @@ $(document).ready(function() {
 	var curr_dekaaz = " " + $("#poem-input-1").val() + " " + $("#poem-input-2").val() + " " + $("#poem-input-3").val() + " ";
 	/* Apply the split method. str is now an array, of size 5, holding ["", "world", "hello", "yen", ""] */
 	var str = curr_dekaaz.replace("[^a-zA-Z0-9\\s]", "").split(/\s+/g);
-	// console.log("Array of words: ");
-	// console.log(str);
+	
 	var num = 0;
 
 	var dict = {};
@@ -595,7 +492,7 @@ $(document).ready(function() {
 		website, and look at the results.
 		*/
 		var urlWordnik = "http://api.wordnik.com:80/v4/word.json/" + individ_word + "/hyphenation?useCanonical=false&limit=50&api_key=ce29061c70e7717832853064a0d05a221520eb145cb41d00e";
-		//alert(urlWordnik);
+		
 		$.ajax({
 	        type: 'GET',
 	        url: urlWordnik,
@@ -625,13 +522,7 @@ $(document).ready(function() {
 		        		for(var k = 0; k<data.length; k++) {
 		        			dekaaz_word += data[k].text.toLowerCase();
 		        		}
-
-		        		// console.log("dekaaz word");
-		        		// console.log(dekaaz_word);
-		        		// console.log("data");
-		        		// console.log(data);
 		        		if(dekaaz_word === str[l]) {
-		        			// console.log("HEEE");
 		        			found_syll_word = 1;
 		        			dict[str[l].toLowerCase()] = data.length;
 		        			break;
@@ -639,27 +530,6 @@ $(document).ready(function() {
 		        	}
 
 		        }
-
-	        	// console.log(dict);
-	        	// 	if(str[l].toLowerCase().indexOf(data[0].text.toLowerCase()) != -1) {
-	        	// 		sylls[m] = data.length;
-	        	// 	}
-	        	// }
-
-	        	// if(data.length != 0) {
-
-		        // 	for(var m = 0; m<str.length; m++) {
-
-		        // 		/* something is wrong here; str[m] is nothing sometimes... */
-		        // 		// console.log("syllables");
-		        // 		// console.log(str[m].toLowerCase().indexOf(data[0].text.toLowerCase()));
-		        // 		// console.log(str[m].toLowerCase());
-		        // 		// console.log(data[0].text.toLowerCase());
-		        // 		if(str[m].toLowerCase().indexOf(data[0].text.toLowerCase()) != -1) {
-		        // 			sylls[m] = data.length;
-		        // 		}
-		        // 	}
-	        	// }
 	        	
 	        	num++;
 	        	/* Eventually, num will reach 5, the size of str, in which case we have all the syllable counts.
@@ -685,185 +555,14 @@ $(document).ready(function() {
 
 	            	$("#syll_count").html('<div style="width: 100%;">The syllables for each word are: ' + 
 	            		sylls.slice(1, sylls.length - 1).toString() + '</div>');
-	            	// alert(sylls.toString());
 	            }
-	            
-	            // alert(sylls[k]);
 	        },
 	        error: function(req, err){  alert('error: ' + err.message + ', ' + err); }
 	    });
-		// console.log(eh);
 	}
 	
-	// $("#syll_count").html('<div style="width: 100%;">The syllables for each word are: ' + syll_str + '</div>');
-	// syll_str = "";
-
-	// 	// $.each( str.split(/\s+/), function( value ) {
-	// 	//   numSyll += new_count(value);
-	// 	// });
-
-	// 	// alert(numSyll);
 
 		
 	}, 1000);
 
 });
-
-// $(document).ready(function() {
-// 	// alert("checkpoint 0");
-// 	setInterval(function() {
-// 		// var syll_str = "";
-// 	var sylls = new Array();
-// 	// 	// var str = $("#poem-input-1").val();
-// 	// 	// str += " " + $("#poem-input-2").val();
-// 	// 	// str += " " + $("#poem-input-3").val();
-// 	// 	// var numSyll = "";
-		
-// 	// 	// var array = str.split(/\s+/);
-		
-		
-// 	// 	// for(var i=0;i<array.length;i++){
-// 	//  //        numSyll += new_count(array[i]);
-// 	//  //    }
-
-// 	//  //    $("#syll_count").html('<div style="width: 100%;">The syllables for each word are: ' + numSyll + '</div>');
-
-// 	var curr_dekaaz = " " + $("#poem-input-1").val() + " " + $("#poem-input-2").val() + " " + $("#poem-input-3").val() + " ";
-// 	var str = curr_dekaaz.replace("[^a-zA-Z0-9\\s]", "").split(/\s+/g);
-// 	// alert(typeof(str));
-// 	// alert('checkpoint 1');
-// 	var num = 0;
-// 	console.log("size of array is: " + str.length);
-// 	for(var k = 0; k<str.length; k++) {
-// 		var individ_word = str[k].replace(/\s+/g, "");
-
-// 		if(individ_word === "") {
-// 			//alert("NO BUENO");
-// 			console.log("Blank word at index: " + k + " and num is " + num);
-// 			num++;
-
-// 			sylls[k] = 0;
-// 			// if(num == str.length) {
-// 			// 	alert("HOOO");
-// 	            // 	for(var l = 0; l<str.length; l++) {
-// 	            // 		if(sylls[l] == null) {
-// 	            // 			sylls[l] = new_count(str[m]);
-// 	            // 		}
-// 	            // 	}
-// 	            // 	$("#syll_count").html('<div style="width: 100%;">The syllables for each word are: ' + sylls.toString() + '</div>');
-// 	            // 	// alert(sylls.toString());
-// 	            // }
-// 			continue;
-// 		}
-// 		// alert('checkpoint 2');
-		
-// 		var urlWordnik = "http://api.wordnik.com:80/v4/word.json/" + individ_word + "/hyphenation?useCanonical=false&limit=50&api_key=ce29061c70e7717832853064a0d05a221520eb145cb41d00e";
-// 		//alert(urlWordnik);
-// 		 $.ajax({
-// 	        type: 'GET',
-// 	        url: urlWordnik,
-// 	        dataType: 'json',
-// 	        success: function (data) {
-	        	
-// 	        	if(data.length != 0) {
-
-// 	        	for(var m = 0; m<str.length; m++) {
-// 	        		// alert(data[0].text.replace("[^a-zA-Z0-9\\s]", ""));
-// 	        		if(str[m].toLowerCase().indexOf(data[0].text) != -1) {
-// 	        			sylls[m] = data.length;
-// 	        			// alert(sylls.toString());
-// 	        		}
-// 	        	}
-// 	        	}
-	        	
-// 	        	num++;
-// 	        	console.log("Wordnik worked: " + k + " and num is " + num);
-// 	        	// alert("Got here");
-// 	        	// sylls[k] = data.length;
-// 	            // syll_str += data.length;
-// 	            if(num == str.length) {
-// 	            	for(var l = 0; l<str.length; l++) {
-// 	            		if(sylls[l] == null) {
-// 	            			sylls[l] = new_count(str[l]);
-// 	            			// alert("THIS HAPPENS");
-// 	            		}
-// 	            	}
-// 	            	$("#syll_count").html('<div style="width: 100%;">The syllables for each word are: ' + 
-// 	            		sylls.slice(1, sylls.length - 1).toString() + '</div>');
-// 	            	// alert(sylls.toString());
-// 	            }
-	            
-// 	            // alert(sylls[k]);
-// 	        },
-// 	        error: function(req, err){  alert('error: ' + err.message + ', ' + err); }
-// 	    });
-
-// 	}
-	
-// 	// $("#syll_count").html('<div style="width: 100%;">The syllables for each word are: ' + syll_str + '</div>');
-// 	// syll_str = "";
-
-// 	// 	// $.each( str.split(/\s+/), function( value ) {
-// 	// 	//   numSyll += new_count(value);
-// 	// 	// });
-
-// 	// 	// alert(numSyll);
-
-		
-// 	}, 1000);
-
-// });
-
-
-
-
-// var lastRequest;
-// $(".lines").keyup(function() {
-// 	if(lastRequest) {
-//         lastRequest.abort();
-//         lastRequest = null;
-//     }
-//     lastRequest = $.ajax({
-//         type: 'POST',
-//         url: "syllables.php",
-//         data: {input1 : $("#poem-input-1").val(), input2 : $("#poem-input-2").val(), input3 : $("#poem-input-3").val()},
-//         dataType: 'HTML',
-//         success: function (data) {
-//             $("#syll_count").html(data);
-            
-//         },
-//         error: function(req, err){ console.log('my message' + err); }
-//     });
-    
-// });
-
-
-
-// $.ajax({
-//     url: "/Users/barrychen/Desktop/something/dekaaz/syllables.php",
-//     type: "POST",
-//         data: {message : "hello"},
-//     	dataType: "JSON",
-//     	success: function(data) {
-//         	alert(data.phone);
-        	
-//     	},
-//     	error: function(xml, error) {
-// 		    console.log(error);
-// 		}
-// });
-
-// $( document ).ready(function() {
-// // alert("HO");
-// 	$.ajax({
-//         url: "syllables.php",
-//         type: "POST",
-//         data: {message : "hello"},
-//     	dataType: 'json',
-//         success: function(syll_data) {
-//         	alert(syll_data.name);
-        	
-//     	}
-//     });
-//   // Handler for .ready() called.
-// });
