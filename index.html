@@ -207,6 +207,7 @@ ul { padding: 0; }
 <!-- dropdown menu code from: http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-dropdowns.php -->
 <script id="account-info" type="x/handlebars">
 <div id="top-bar" style="text-align: right; width: 600px; margin: auto; background: white; padding: 0px 0px;"><ul class="nav nav-pills" style="margin-top: 5px;">
+    <li><a href="home.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="dekaaz.php" >Dekaaz</a></li>
     <li class="active"><a href="index.html" >Compose</a></li>
@@ -292,7 +293,7 @@ ul { padding: 0; }
         <div style="display: inline-block; width: 47%; ">
         {line1}<br/>{line2}<br/>{line3}<br/>Author: <a id="{owner_id}" class="user">{owner}</a><br/>
         <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-        <audio controls><source src="{audio}" type="audio/mpeg">Your browser does not support this audio format.</audio>
+        {audio}
         </div>
         <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
         <img src="images/form.png" style="max-height: 100px; max-width: 100px; float: right;"/>
@@ -305,7 +306,8 @@ ul { padding: 0; }
         <li class="list-item" style="display: none;" id="{id}">
         
         <div style="display: inline-block; width: 47%; ">
-        {id} {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/><audio controls><source src="{audio}" type="audio/mpeg">Your browser does not support this audio format.</audio>
+        {id} {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/>
+        {audio}
         </div>
         <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
         <img src="images/form.png" style="max-height: 100px; max-width: 100px; float: right;"/>
