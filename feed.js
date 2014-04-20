@@ -351,7 +351,7 @@ YUI().use('node', function(Y) {
 		if(Parse.User.current() != null) {
 			dekaazPoem.set("parent", Parse.User.current());
 		}
-		
+		alert("Thank you for submitting a Dekaaz!");
 		//Once it is saved, show it in the list of dekaaz.
 		dekaazPoem.save(null, {
 		  success: function(item) {
@@ -376,6 +376,7 @@ YUI().use('node', function(Y) {
 				input1.set('value', '').focus();
 				input2.set('value', '').focus();
 				input3.set('value', '').focus();
+				
 		  }
 		});
 
