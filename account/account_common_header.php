@@ -282,7 +282,7 @@ if(Parse.User.current() == null) {
 
 
   <script id="account-info" type="x/handlebars">
-<div id="top-bar" style="text-align: right; width: 600px; margin: auto; background: white; padding: 0px 0px;"><ul class="nav nav-pills" style="margin-top: 5px;">
+<div id="top-bar" style="text-align: right; width: 700px; margin: auto; background: white; padding: 0px 0px;"><ul class="nav nav-pills" style="margin-top: 5px;">
     <li><a href="home.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="dekaaz.php" >Dekaaz</a></li>

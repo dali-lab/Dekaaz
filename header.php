@@ -6,6 +6,10 @@
   <meta name="description" content="Dekaaz App">
   <meta name="viewport" content="width=device-width">
 
+  <script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "3b8f0c68-515f-47b3-9466-8ea8a1762008", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -208,7 +212,7 @@ ul { padding: 0; }
   <!--<script id="account-info" type="x/handlebars"><div style="text-align: right; width: 620px; margin: auto; background: white; padding: 0px 0px;"><div class="left" style="text-align: left !important;"><a href="about.html">About</a> | <a href="index.html" >Compose</a> | <a href="signup.html" id="logout-button">Log Out</a></div><div class="right">Welcome, {username}! </div></div></script>-->
 <!-- dropdown menu code from: http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-dropdowns.php -->
 <script id="account-info" type="x/handlebars">
-<div id="top-bar" style="text-align: right; width: 600px; margin: auto; background: white; padding: 0px 0px;"><ul class="nav nav-pills" style="margin-top: 5px;">
+<div id="top-bar" style="text-align: right; width: 700px; margin: auto; background: white; padding: 0px 0px;"><ul class="nav nav-pills" style="margin-top: 5px;">
     <li><a href="home.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="dekaaz.php" >Dekaaz</a></li>

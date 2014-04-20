@@ -35,9 +35,28 @@
 </li>
 </script>
 
-<div class="fb-like" data-href="http://localhost:8888/dekaaz/dekaazpage.php?dekaaz_id=<?php
+<!--<div class="fb-like" data-href="http://localhost:8888/dekaaz/dekaazpage.php?dekaaz_id=<?php
 	echo $_GET['dekaaz_id'];
 ?>" data-width="450" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+-->
+<span class='st_sharethis_large' displayText='ShareThis' st_url="http://dekaaz.herokuapp.com/dekaazpage.php?dekaaz_id=<?php
+	echo $_GET['dekaaz_id'];
+?>"></span>
+<span class='st_facebook_large' displayText='Facebook' st_url="http://dekaaz.herokuapp.com/dekaazpage.php?dekaaz_id=<?php
+	echo $_GET['dekaaz_id'];
+?>"></span>
+<span class='st_twitter_large' displayText='Tweet' st_url="http://dekaaz.herokuapp.com/dekaazpage.php?dekaaz_id=<?php
+	echo $_GET['dekaaz_id'];
+?>"></span>
+<span class='st_linkedin_large' displayText='LinkedIn' st_url="http://dekaaz.herokuapp.com/dekaazpage.php?dekaaz_id=<?php
+	echo $_GET['dekaaz_id'];
+?>"></span>
+<span class='st_pinterest_large' displayText='Pinterest' st_url="http://dekaaz.herokuapp.com/dekaazpage.php?dekaaz_id=<?php
+	echo $_GET['dekaaz_id'];
+?>"></span>
+<span class='st_email_large' displayText='Email' st_url="http://dekaaz.herokuapp.com/dekaazpage.php?dekaaz_id=<?php
+	echo $_GET['dekaaz_id'];
+?>"></span>
 
 
 <script>
