@@ -178,6 +178,12 @@ YUI().use('node', function(Y) {
 
 	function populate(val, owner_param, owner_id_param) {
 
+
+		// console.log(Parse.User.current().get('role'));
+		// if(Parse.User.current().get('role') != null) {
+		// 	console.log(Parse.User.current().get('role'));
+		// }
+
 		if(owner_id_param == null) {
 			var audioHTML;
 			if(val.get('Sound') != null) {
@@ -194,7 +200,16 @@ YUI().use('node', function(Y) {
 				audio: audioHTML,
 				id: val.id,
 			});
+
 			incompleteItemList.prepend(content);
+			
+			Parse.User.current().fetch({
+		  	success: function(author) {
+		  		if(author.get('role') == 0) {
+		  			
+		  		}
+		  	  }
+		  	});
 		} else {
 			var audioHTML;
 			if(val.get('Sound') != null) {
