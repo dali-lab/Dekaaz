@@ -303,25 +303,95 @@ YUI().use('node', function(Y) {
 		structure[0] = 2;
 		structure[1] = 3;
 		structure[2] = 5;
+		var struct_index = 0;
 
-		var current_index = 0;
-
-		var solution = new Array();
-		solution[0] = new Array();
-		solution[1] = new Array();
-		solution[2] = new Array();
-
-
-		for (var i=0;i<syll_arr.length;i++)
-		{ 
-			structure[current_index] -= syll_arr[i];
-			solution[current_index][solution[current_index].length] = syll_arr[i];
-			if(structure[current_index] == 0) {
-				current_index++;
+		var totalSyllCount = 0;
+		for (var p=0;p<syll_arr.length;p++)
+		{
+			totalSyllCount += syll_arr[p];
+			if(totalSyllCount == structure[struct_index]) {
+				struct_index++;
+				totalSyllCount = 0;
+			} else {
+				if(totalSyllCount > structure[struct_index]) {
+					alert("Syll Count Wrong!");
+					return null;
+				}
 			}
 		}
-		console.log(solution);
-		return solution;
+		
+
+			
+
+			//-------
+			
+
+			var current_index = 0;
+
+			var solution = new Array();
+			solution[0] = new Array();
+			solution[1] = new Array();
+			solution[2] = new Array();
+
+			var bool = new Array();
+
+			for (var i=0;i<syll_arr.length;i++)
+			{ 
+				structure[current_index] -= syll_arr[i];
+				solution[current_index][solution[current_index].length] = syll_arr[i];
+				if(structure[current_index] == 0) {
+					for (var k=0;k<solution[current_index].length;k++)
+					{
+						for(var l=0;l<solution[current_index][k] - 1;l++) {
+							bool.push(true);
+						}
+						bool.push(false);
+					}
+					bool.pop();
+					current_index++;
+				}
+			}
+			console.log(bool);
+			return bool;
+
+			// for (var k=0;k<syll_arr.length;k++)
+			// {
+			// 	for (var k=0;k<syll_arr.length;k++)
+			// 	{
+			// 		for(var l=0;l<syll_arr[k] - 1;l++) {
+			// 			bool.push(true);
+			// 		}
+			// 		bool.push(false);
+			// 	}
+			// }
+
+			// console.log(bool);
+			// return null;
+
+			// var structure = new Array();
+			// structure[0] = 2;
+			// structure[1] = 3;
+			// structure[2] = 5;
+
+			// var current_index = 0;
+
+			// var solution = new Array();
+			// solution[0] = new Array();
+			// solution[1] = new Array();
+			// solution[2] = new Array();
+
+
+			// for (var i=0;i<syll_arr.length;i++)
+			// { 
+			// 	structure[current_index] -= syll_arr[i];
+			// 	solution[current_index][solution[current_index].length] = syll_arr[i];
+			// 	if(structure[current_index] == 0) {
+			// 		current_index++;
+			// 	}
+			// }
+			// console.log(solution);
+			// return solution;
+		
 	}
 
 	/* 
@@ -343,9 +413,13 @@ YUI().use('node', function(Y) {
 		dekaazPoem.set("line2", textLine2);
 		dekaazPoem.set("line3", textLine3);
 		var decomposed_array = decompose(sylls.slice(1, sylls.length - 1));
-		dekaazPoem.set("line1syll", decomposed_array[0]);
-		dekaazPoem.set("line2syll", decomposed_array[1]);
-		dekaazPoem.set("line3syll", decomposed_array[2]);
+		if(decomposed_array == null) {
+			return;
+		}
+		// dekaazPoem.set("line1syll", decomposed_array[0]);
+		// dekaazPoem.set("line2syll", decomposed_array[1]);
+		// dekaazPoem.set("line3syll", decomposed_array[2]);
+		dekaazPoem.set("syllarray", decomposed_array);
 		dekaazPoem.set("Sound", soundFile);
 
 		if(Parse.User.current() != null) {

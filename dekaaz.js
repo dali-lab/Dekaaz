@@ -72,24 +72,24 @@ function individualizeDekaazs(num) {
  //    // $('.pagination ul').append('<li class="disabled"><a href="#">...</a></li>');
 	// $('.pagination ul').append('<li><a href="javascript:goToAfterPage(' + Math.floor(num/10) + ')">→</a></li>');
     // $('#example').bootstrapPaginator(options);
+    console.log(currentDekaaz);
     $('#incomplete-items li').slice(currentDekaaz+1).hide();
-    $('#incomplete-items li:eq( ' + currentDekaaz + ' )').show();
-
+    $('#incomplete-items li:eq(' + currentDekaaz + ')').show();
     $(window).keydown(function(e){
 	    if(e.which === 39){
 	    	// alert("DETECTED");
 	        if(currentDekaaz<num-1){
-	            $('#incomplete-items li:eq( ' + currentDekaaz + ' )').hide();
+	            $('#incomplete-items li:eq(' + currentDekaaz + ')').hide();
 	            currentDekaaz = currentDekaaz+1;
-	            $('#incomplete-items li:eq( ' + currentDekaaz + ' )').show();
+	            $('#incomplete-items li:eq(' + currentDekaaz + ')').show();
 	        }
 	    }
 	    else if(e.which === 37){
 	    	// alert("DETECTED2");
-	        if(currentDekaaz>0){
-	            $('#incomplete-items li:eq( ' + currentDekaaz + ' )').hide();
+    		if(currentDekaaz>0){
+	            $('#incomplete-items li:eq(' + currentDekaaz + ')').hide();
 	            currentDekaaz = currentDekaaz-1;
-	            $('#incomplete-items li:eq( ' + currentDekaaz + ' )').show();
+	            $('#incomplete-items li:eq(' + currentDekaaz + ')').show();
 	        }
 	    }
 	});
