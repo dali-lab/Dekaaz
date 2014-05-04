@@ -55,8 +55,8 @@ void setup() {
     background(255);
     
     // canvas size
-    //size(74, 71); // width x height
-    size(tester, 71);
+    size(74, 71); // width x height
+    //size(tester, 71);
 
     diameter = (width+height)/2 / 10;
     radius = diameter / 2;
