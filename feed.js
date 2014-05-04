@@ -505,7 +505,8 @@ YUI().use('node', function(Y) {
 							if(i == results.length - 1) {
 								paginateDekaazs(results.length);
 							}
-						  }Processing.reload();
+						  }
+						  Processing.reload();
 						});
 					} else {
 						populate(val, "Unknown", null);
