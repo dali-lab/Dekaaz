@@ -506,7 +506,6 @@ YUI().use('node', function(Y) {
 								paginateDekaazs(results.length);
 							}
 						  }
-						  Processing.reload();
 						});
 					} else {
 						populate(val, "Unknown", null);
@@ -523,7 +522,7 @@ YUI().use('node', function(Y) {
 	    alert("Error when retrieving Todos: " + error.code + " " + error.message);
 	  }
 	});
-	//Processing.reload();
+	Processing.reload();
 });
 
 /* 
