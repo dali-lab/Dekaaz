@@ -498,14 +498,14 @@ YUI().use('node', function(Y) {
 						    var author_name = author.getUsername();
 
 						    populate(val, author_name, author.id);
-						    Processing.reload();
+						    //Processing.reload();
 
 
 							attachUserLinks();
 							if(i == results.length - 1) {
 								paginateDekaazs(results.length);
 							}
-						  }
+						  }Processing.reload();
 						});
 					} else {
 						populate(val, "Unknown", null);
