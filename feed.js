@@ -239,7 +239,7 @@ YUI().use('node', function(Y) {
 		// This line sets the image. I have set it to be Logo.png, but you can
 		// set the image with Processing, given the three arrays of int's directly above.
 		//$('#incomplete-items:first>li img').attr('src', 'images/Logo.png');
-		Processing.reload();
+		//Processing.reload();
 	}
 
 	/* Search Dekaazs */
