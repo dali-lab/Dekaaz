@@ -203,13 +203,13 @@ YUI().use('node', function(Y) {
 
 			incompleteItemList.prepend(content);
 			
-			Parse.User.current().fetch({
-		  	success: function(author) {
-		  		if(author.get('role') == 0) {
+			// Parse.User.current().fetch({
+		 //  	success: function(author) {
+		 //  		if(author.get('role') == 0) {
 		  			
-		  		}
-		  	  }
-		  	});
+		 //  		}
+		 //  	  }
+		 //  	});
 		} else {
 			var audioHTML;
 			if(val.get('Sound') != null) {
