@@ -498,6 +498,7 @@ YUI().use('node', function(Y) {
 						    var author_name = author.getUsername();
 
 						    populate(val, author_name, author.id);
+						    Processing.reload();
 
 
 							attachUserLinks();
@@ -521,7 +522,7 @@ YUI().use('node', function(Y) {
 	    alert("Error when retrieving Todos: " + error.code + " " + error.message);
 	  }
 	});
-	Processing.reload();
+	//Processing.reload();
 });
 
 /* 
