@@ -119,6 +119,24 @@ function setCookie(cname,cvalue,exdays)
 	document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
+
+// delete poem
+function deletePoem(id) {
+	var Dekaaz = Parse.Object.extend("Dekaaz");
+	var query = new Parse.Query(Dekaaz);
+	query.get(id, {
+		success: function(DekaazRow) {
+			// The object was retrieved successfully.
+			DekaazRow.destroy({});
+			document.location.reload();
+		},
+		error: function(object, error) {
+
+		}
+	});
+	// var object = query.find(id);
+}
+
 YUI().use('node', function(Y) {
 	
 	var Dekaaz, 
@@ -191,6 +209,7 @@ YUI().use('node', function(Y) {
 			} else {
 				audioHTML = 'NO AUDIO AVAILABLE';
 			}
+
 			var content = Y.Lang.sub(Y.one('#todo-items-template-no-account').getHTML(), {
 				line1: val.get('line1'),
 				line2: val.get('line2'),
@@ -202,14 +221,8 @@ YUI().use('node', function(Y) {
 			});
 
 			incompleteItemList.prepend(content);
-			
-			Parse.User.current().fetch({
-		  	success: function(author) {
-		  		if(author.get('role') == 0) {
-		  			
-		  		}
-		  	  }
-		  	});
+
+
 		} else {
 			var audioHTML;
 			if(val.get('Sound') != null) {
@@ -217,6 +230,7 @@ YUI().use('node', function(Y) {
 			} else {
 				audioHTML = 'NO AUDIO AVAILABLE';
 			}
+
 			var content = Y.Lang.sub(Y.one('#todo-items-template').getHTML(), {
 				line1: val.get('line1'),
 				line2: val.get('line2'),
@@ -227,7 +241,41 @@ YUI().use('node', function(Y) {
 				audio: audioHTML,
 				id: val.id,
 			});
+
+			// attach the items to the html file
 			incompleteItemList.prepend(content);
+
+			// get the role type of the user
+			var author = Parse.User.current();
+			if(author != null) {
+
+			author.fetch({
+		  	success: function(author) {
+		  		if(author.get('role') == 0) {
+		  			// $(document).ready(function(){
+ 				 	// $("#poem_delete").hide();
+  					// });
+		  			// document.write("-- <b>bold</b> <font color=red> red </font>--");
+		  			// $("#poem_delete")
+		  		} else if(author.get('role') == 1) {
+		  			// Y.one('#poem_delete').hide;
+		  			$(document).ready(function(){
+ 				 	$(".deleteBtn").hide();
+  					});
+		  		} 
+		  	  },
+		  	 error: function(error) {
+			    alert("Error when retrieving: " + error.code + " " + error.message);
+			  }
+		  	});
+
+		  	// visitors
+			} else {
+				// Y.one('#poem_delete').hide;
+		  		$(document).ready(function(){
+ 				$(".deleteBtn").hide();
+  				});
+			}
 		}
 
 		// The following three variables are arrays of integers that hold the syllable
@@ -308,8 +356,6 @@ YUI().use('node', function(Y) {
 		});
 
 		return false;
-
-		
 	});
 
 	function decompose(syll_arr) {

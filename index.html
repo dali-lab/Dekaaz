@@ -273,7 +273,8 @@ ul { padding: 0; }
 	
 		<!-- HTML for SEARCH BAR; the Javascript for loading the results of the search can be found in "feed.js" under "Search Dekaazs" section -->
 		<form style="width: 100%;" id="tfnewsearch" method="get" class="dekaaz_search" >
-		        <input style="width: 80%;" type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton" style="border-right:solid 1px black; border: solid 1px black !important; width: 20%;">
+		        <input style="width: 80%;" type="text" class="tftextinput" name="q" size="21" maxlength="120">
+            <input type="submit" value="search" class="tfbutton" style="border-right:solid 1px black; border: solid 1px black !important; width: 20%;">
 		</form>
 	
 	
@@ -291,10 +292,23 @@ ul { padding: 0; }
         <!--<input type="checkbox" id="{id}">-->
         
         <div style="display: inline-block; width: 47%; ">
-        {line1}<br/>{line2}<br/>{line3}<br/>Author: <a id="{owner_id}" class="user">{owner}</a><br/>
-        <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-        {audio}
+        {line1}<br/>
+        {line2}<br/>
+        {line3}<br/>
+        Author: <a id="{owner_id}" class="user">{owner}</a><br/>
+
+        <!--facbook likes-->
+        <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true">
         </div>
+        {audio}
+
+        <!--delete button for admin-->
+        <br/>
+        <input style="text-align: left !important; height: 40px; " type="button" class="deleteBtn" id="{id}" value="Delete" onClick="deletePoem(id)">
+        <br>    
+        </div>
+
+        <!--Dekaaz pics-->
         <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
         <img src="images/form.png" style="max-height: 100px; max-width: 100px; float: right;"/>
         
