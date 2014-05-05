@@ -8,14 +8,9 @@ Dot[] dots;
 // Connections are calculated from word and syllable information in the Parse database.
 
 
-//boolean[] connections = {true, false, true, true, true, false, false};
-boolean[] connections = {true, true, true, true, true, true, true};
-// randomize array
-for (int i = 0; i < 7; i++) {
-    connections[i] = random(1) < 0.5;
-}
+boolean[] connections;
 
-boolean[] connections = (boolean[]) getSyllableArray()['vl8ndncgZm'];
+connections = (boolean[]) syllable_array();
 
 class Dot {
 	float x, y;
