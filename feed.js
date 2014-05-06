@@ -568,11 +568,17 @@ YUI().use('node', function(Y) {
 	var counter_dekaaz = 0;
 	console.log("ready");
 	var curr_user_role;
-	if(Parse.User.current() != null) {
-		curr_user_role = Parse.User.current().get("role");
+	var curr_user_var = Parse.User.current();
+	if(curr_user_var != null) {
+		curr_user_var.fetch({
+			success: function(author) {
+				curr_user_role = author.get('role');
+			}
+		});
 	} else {
 		curr_user_role = -1;
 	}
+	console.log("FIrst role: " + curr_user_role);
 	query.find({
 	  success: function(results) {
 			if (results.length > 0) {
