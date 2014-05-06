@@ -16,36 +16,36 @@
   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
   <script type="text/javascript">
-    // function getSyllableArray() {
+    var x = 0;
+    var syllable_map = {};
+    var ids = array();
 
-    //   var syllable_map = {};
-
-    //   Dekaaz = Parse.Object.extend("Dekaaz");
-    //   query = new Parse.Query(Dekaaz);
+      Dekaaz = Parse.Object.extend("Dekaaz");
+      query = new Parse.Query(Dekaaz);
       
-    //   query.descending('createdAt');
+      query.descending('createdAt');
 
-    //   query.include("syllarray");
+      query.include("syllarray");
 
-    //   query.find({
-    //       success: function(results) {
-    //         $.each(results, function( index, value ) {
-    //           syllable_map[value.id] = value.get("syllarray");
-    //         });
-    //         return syllable_map;
+      query.find({
+          success: function(results) {
+            $.each(results, function( index, value ) {
+              ids.push(value.id); 
+              syllable_map[value.id] = value.get("syllarray");
+            });
+            return syllable_map;
 
-    //       },
-    //       error: function(error) {
-    //         alert("Error when retrieving: " + error.code + " " + error.message);
-    //       }
-    //   });
-    // }  
+          },
+          error: function(error) {
+            alert("Error when retrieving: " + error.code + " " + error.message);
+          }
+      });
 
     function getSyllableArray() {
-
-      var syllable_map = {};
-      syllable_map['vl8ndncgZm'] = [true, false, false, false, false, false, false];
-    }
+      var ret = syllable_map[ids[x]];
+      x++;
+      return ret;
+    }  
 
 
   </script>
