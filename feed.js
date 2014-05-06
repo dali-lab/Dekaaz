@@ -186,19 +186,19 @@ YUI().use('node', function(Y) {
 		// }
 
 		if(owner_id_param == null) {
-			// var audioHTML;
-			// if(val.get('Sound') != null) {
-			// 	audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
-			// } else {
-			// 	audioHTML = 'NO AUDIO AVAILABLE';
-			// }
+			var audioHTML;
+			if(val.get('Sound') != null) {
+				audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
+			} else {
+				audioHTML = 'NO AUDIO AVAILABLE';
+			}
 			var content = Y.Lang.sub(Y.one('#todo-items-template-no-account').getHTML(), {
 				line1: val.get('line1'),
 				line2: val.get('line2'),
 				line3: val.get('line3'),
 				owner: owner_param,
 				createdAt: val.get('createdAt'),
-				// audio: audioHTML,
+				audio: audioHTML,
 				id: val.id,
 			});
 
@@ -212,12 +212,12 @@ YUI().use('node', function(Y) {
 		 //  	  }
 		 //  	});
 		} else {
-			// var audioHTML;
-			// if(val.get('Sound') != null) {
-			// 	audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
-			// } else {
-			// 	audioHTML = 'NO AUDIO AVAILABLE';
-			// }
+			var audioHTML;
+			if(val.get('Sound') != null) {
+				audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
+			} else {
+				audioHTML = 'NO AUDIO AVAILABLE';
+			}
 			var content = Y.Lang.sub(Y.one('#todo-items-template').getHTML(), {
 				line1: val.get('line1'),
 				line2: val.get('line2'),
@@ -225,7 +225,7 @@ YUI().use('node', function(Y) {
 				owner: owner_param,
 				owner_id: owner_id_param,
 				createdAt: val.get('createdAt'),
-				// audio: audioHTML,
+				audio: audioHTML,
 				id: val.id,
 			});
 			incompleteItemList.prepend(content);
@@ -495,34 +495,31 @@ YUI().use('node', function(Y) {
 			}
 			//Append each of the incomplete tasks to the Incomplete List
 			Y.Array.each(results, function(val, i, arr) {
-				populate(val, "null", "nIQpxR8zu3");
-				if(i == results.length - 1) {
-					paginateDekaazs(results.length);
-				}
-
-			  // 		var author = val.get('parent');
-			  // 		if(author != null) {
-				 //  		author.fetch({
-					// 	  success: function(author) {
-					// 	    var author_name = author.getUsername();
-
-					// 	    populate(val, author_name, author.id);
-					// 	    
 
 
-					// 		attachUserLinks();
-					// 		if(i == results.length - 1) {
-					// 			paginateDekaazs(results.length);
-					// 		}
-					// 	  }
-					// 	});
-					// } else {
-					// 	populate(val, "Unknown", null);
-					// 	attachUserLinks();
-					// 	if(i == results.length - 1) {
-					// 		paginateDekaazs(results.length);
-					// 	}
-					// }
+			  		var author = val.get('parent');
+			  		if(author != null) {
+				  		author.fetch({
+						  success: function(author) {
+						    var author_name = author.getUsername();
+
+						    populate(val, author_name, author.id);
+						    //Processing.reload();
+
+
+							attachUserLinks();
+							if(i == results.length - 1) {
+								paginateDekaazs(results.length);
+							}
+						  }
+						});
+					} else {
+						populate(val, "Unknown", null);
+						attachUserLinks();
+						if(i == results.length - 1) {
+							paginateDekaazs(results.length);
+						}
+					}
 
 			});
 			
