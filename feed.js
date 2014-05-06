@@ -49,7 +49,7 @@ function paginateDekaazs(num) {
  	// 	x = '<li class="active" id="1"><a href="javascript:goToPage(' + 1 + ')">' + 1 + '</a></li>';
   // 		$('.pagination ul').append(x);
  	// }
- 	for (var i=1; i<=Math.ceil(num/10); i++)
+ 	for (var i=1; i<=Math.ceil(num/100); i++)
   	{
   		if(i == 1) {
   			x = '<li class="active" id="' + i + '"><a href="javascript:goToPage(' + i + ')">' + i + '</a></li>';
@@ -62,16 +62,16 @@ function paginateDekaazs(num) {
     // $('.pagination ul').append('<li class="disabled"><a href="#">...</a></li>');
 	$('.pagination ul').append('<li><a href="javascript:goToAfterPage(' + Math.floor(num/10) + ')">→</a></li>');
     // $('#example').bootstrapPaginator(options);
-    $('#incomplete-items li').slice(10).hide();
-    $('#incomplete-items li').slice(0, 10).show();
+    $('#incomplete-items li').slice(100).hide();
+    $('#incomplete-items li').slice(0, 100).show();
 
     // attachPaginationEvents(Math.ceil(num/10));
 }
 
 function goToPage(num) {
-	$('#incomplete-items li').slice(0, num*10-10).hide();
-	$('#incomplete-items li').slice(num*10-10, num*10).show();
-	$('#incomplete-items li').slice(num*10).hide();
+	$('#incomplete-items li').slice(0, num*100-100).hide();
+	$('#incomplete-items li').slice(num*100-100, num*100).show();
+	$('#incomplete-items li').slice(num*100).hide();
 	$('.active').removeClass('active');
 	$('#' + num).addClass('active');
 	
@@ -186,19 +186,19 @@ YUI().use('node', function(Y) {
 		// }
 
 		if(owner_id_param == null) {
-			var audioHTML;
-			if(val.get('Sound') != null) {
-				audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
-			} else {
-				audioHTML = 'NO AUDIO AVAILABLE';
-			}
+			// var audioHTML;
+			// if(val.get('Sound') != null) {
+			// 	audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
+			// } else {
+			// 	audioHTML = 'NO AUDIO AVAILABLE';
+			// }
 			var content = Y.Lang.sub(Y.one('#todo-items-template-no-account').getHTML(), {
 				line1: val.get('line1'),
 				line2: val.get('line2'),
 				line3: val.get('line3'),
 				owner: owner_param,
 				createdAt: val.get('createdAt'),
-				audio: audioHTML,
+				// audio: audioHTML,
 				id: val.id,
 			});
 
@@ -212,12 +212,12 @@ YUI().use('node', function(Y) {
 		 //  	  }
 		 //  	});
 		} else {
-			var audioHTML;
-			if(val.get('Sound') != null) {
-				audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
-			} else {
-				audioHTML = 'NO AUDIO AVAILABLE';
-			}
+			// var audioHTML;
+			// if(val.get('Sound') != null) {
+			// 	audioHTML = '<audio controls><source src="' + val.get('Sound') + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
+			// } else {
+			// 	audioHTML = 'NO AUDIO AVAILABLE';
+			// }
 			var content = Y.Lang.sub(Y.one('#todo-items-template').getHTML(), {
 				line1: val.get('line1'),
 				line2: val.get('line2'),
@@ -225,7 +225,7 @@ YUI().use('node', function(Y) {
 				owner: owner_param,
 				owner_id: owner_id_param,
 				createdAt: val.get('createdAt'),
-				audio: audioHTML,
+				// audio: audioHTML,
 				id: val.id,
 			});
 			incompleteItemList.prepend(content);
@@ -241,7 +241,7 @@ YUI().use('node', function(Y) {
 		// set the image with Processing, given the three arrays of int's directly above.
 		//$('#incomplete-items:first>li img').attr('src', 'images/Logo.png');
 		
-		if(numTimes == 11) {
+		if(numTimes == 10) {
 		Processing.reload();
 		}
 		numTimes++;
@@ -487,6 +487,7 @@ YUI().use('node', function(Y) {
 	query = new Parse.Query(Dekaaz);
 	// query.limit(10);
 	query.descending('createdAt');
+	// var in_use = false;
 	query.find({
 	  success: function(results) {
 			if (results.length > 0) {
@@ -494,31 +495,34 @@ YUI().use('node', function(Y) {
 			}
 			//Append each of the incomplete tasks to the Incomplete List
 			Y.Array.each(results, function(val, i, arr) {
+				populate(val, "null", "nIQpxR8zu3");
+				if(i == results.length - 1) {
+					paginateDekaazs(results.length);
+				}
+
+			  // 		var author = val.get('parent');
+			  // 		if(author != null) {
+				 //  		author.fetch({
+					// 	  success: function(author) {
+					// 	    var author_name = author.getUsername();
+
+					// 	    populate(val, author_name, author.id);
+					// 	    
 
 
-			  		var author = val.get('parent');
-			  		if(author != null) {
-				  		author.fetch({
-						  success: function(author) {
-						    var author_name = author.getUsername();
-
-						    populate(val, author_name, author.id);
-						    //Processing.reload();
-
-
-							attachUserLinks();
-							if(i == results.length - 1) {
-								paginateDekaazs(results.length);
-							}
-						  }
-						});
-					} else {
-						populate(val, "Unknown", null);
-						attachUserLinks();
-						if(i == results.length - 1) {
-							paginateDekaazs(results.length);
-						}
-					}
+					// 		attachUserLinks();
+					// 		if(i == results.length - 1) {
+					// 			paginateDekaazs(results.length);
+					// 		}
+					// 	  }
+					// 	});
+					// } else {
+					// 	populate(val, "Unknown", null);
+					// 	attachUserLinks();
+					// 	if(i == results.length - 1) {
+					// 		paginateDekaazs(results.length);
+					// 	}
+					// }
 
 			});
 			
