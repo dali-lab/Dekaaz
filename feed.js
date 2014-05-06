@@ -1,6 +1,7 @@
 Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8jzS98f3yVLTtza17J2zqGBx");
 
 var soundFile;
+var numTimes = 0;
 
  function croakCallbackFunction(croak_id,croakmp3source,callbackCode)
  {
@@ -239,7 +240,11 @@ YUI().use('node', function(Y) {
 		// This line sets the image. I have set it to be Logo.png, but you can
 		// set the image with Processing, given the three arrays of int's directly above.
 		//$('#incomplete-items:first>li img').attr('src', 'images/Logo.png');
+		
+		if(numTimes == 11) {
 		Processing.reload();
+		}
+		numTimes++;
 	}
 
 	/* Search Dekaazs */
