@@ -1,6 +1,7 @@
 Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8jzS98f3yVLTtza17J2zqGBx");
 
 var soundFile;
+var numTimes = 0;
 
  function croakCallbackFunction(croak_id,croakmp3source,callbackCode)
  {
@@ -13,6 +14,15 @@ var soundFile;
 
     }
  }
+
+ function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
 
 function logoutFunc() {
 	$("#logout-button").attr("disabled", "disabled");
@@ -48,7 +58,7 @@ function paginateDekaazs(num) {
  	// 	x = '<li class="active" id="1"><a href="javascript:goToPage(' + 1 + ')">' + 1 + '</a></li>';
   // 		$('.pagination ul').append(x);
  	// }
- 	for (var i=1; i<=Math.ceil(num/10); i++)
+ 	for (var i=1; i<=Math.ceil(num/100); i++)
   	{
   		if(i == 1) {
   			x = '<li class="active" id="' + i + '"><a href="javascript:goToPage(' + i + ')">' + i + '</a></li>';
@@ -61,16 +71,16 @@ function paginateDekaazs(num) {
     // $('.pagination ul').append('<li class="disabled"><a href="#">...</a></li>');
 	$('.pagination ul').append('<li><a href="javascript:goToAfterPage(' + Math.floor(num/10) + ')">→</a></li>');
     // $('#example').bootstrapPaginator(options);
-    $('#incomplete-items li').slice(10).hide();
-    $('#incomplete-items li').slice(0, 10).show();
+    $('#incomplete-items li').slice(100).hide();
+    $('#incomplete-items li').slice(0, 100).show();
 
     // attachPaginationEvents(Math.ceil(num/10));
 }
 
 function goToPage(num) {
-	$('#incomplete-items li').slice(0, num*10-10).hide();
-	$('#incomplete-items li').slice(num*10-10, num*10).show();
-	$('#incomplete-items li').slice(num*10).hide();
+	$('#incomplete-items li').slice(0, num*100-100).hide();
+	$('#incomplete-items li').slice(num*100-100, num*100).show();
+	$('#incomplete-items li').slice(num*100).hide();
 	$('.active').removeClass('active');
 	$('#' + num).addClass('active');
 	
@@ -194,7 +204,14 @@ YUI().use('node', function(Y) {
 
 	});
 
-	function populate(val, owner_param, owner_id_param) {
+	function createLists(num) {
+		$('#incomplete-items').empty();
+		for(var i = 0; i<num; i++) {
+			$('#incomplete-items').append('<li class="list-item" style="display: none;"></li>');
+		}
+	}
+
+	function populate(val, owner_param, owner_id_param, child_num) {
 
 
 		// console.log(Parse.User.current().get('role'));
@@ -220,9 +237,16 @@ YUI().use('node', function(Y) {
 				id: val.id,
 			});
 
-			incompleteItemList.prepend(content);
-
-
+			$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
+			// incompleteItemList.prepend(content);
+			
+			// Parse.User.current().fetch({
+		 //  	success: function(author) {
+		 //  		if(author.get('role') == 0) {
+		  			
+		 //  		}
+		 //  	  }
+		 //  	});
 		} else {
 			var audioHTML;
 			if(val.get('Sound') != null) {
@@ -276,6 +300,9 @@ YUI().use('node', function(Y) {
  				$(".deleteBtn").hide();
   				});
 			}
+
+			$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
+
 		}
 
 		// The following three variables are arrays of integers that hold the syllable
@@ -286,7 +313,9 @@ YUI().use('node', function(Y) {
 
 		// This line sets the image. I have set it to be Logo.png, but you can
 		// set the image with Processing, given the three arrays of int's directly above.
-		$('#incomplete-items:first>li img').attr('src', 'images/Logo.png');
+		//$('#incomplete-items:first>li img').attr('src', 'images/Logo.png');
+		numTimes++;
+		
 	}
 
 	/* Search Dekaazs */
@@ -527,36 +556,80 @@ YUI().use('node', function(Y) {
 	query = new Parse.Query(Dekaaz);
 	// query.limit(10);
 	query.descending('createdAt');
+	var in_use = false;
+	var counter_dekaaz = 0;
+	console.log("ready");
 	query.find({
 	  success: function(results) {
 			if (results.length > 0) {
 				noTasksMessage.addClass('hidden');
 			}
+
+			createLists(results.length);
+
 			//Append each of the incomplete tasks to the Incomplete List
 			Y.Array.each(results, function(val, i, arr) {
-
-
+					// console.log("YO");
+					
+					// while(counter_dekaaz != i) {
+					// 	var qq = 0;
+					// }
+					console.log("numtimes: " + numTimes);
 			  		var author = val.get('parent');
 			  		if(author != null) {
+			  	// 		while(in_use == true) {
+							
+						// }
+						var x = i + 1;
+						// in_use = true;
+						
 				  		author.fetch({
 						  success: function(author) {
 						    var author_name = author.getUsername();
-
-						    populate(val, author_name, author.id);
-
+						    console.log("i: " + x);
+						    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+						    populate(val, author_name, author.id, x);
+						    if(numTimes == 11) {
+						    	console.log("Called");
+								Processing.reload();
+							}
+							// numTimes++;
+						    //Processing.reload();
+						    console.log(i);
 
 							attachUserLinks();
 							if(i == results.length - 1) {
 								paginateDekaazs(results.length);
 							}
+
+							// in_use = false;
+							// console.log(counter_dekaaz);
+							counter_dekaaz++;
 						  }
 						});
 					} else {
-						populate(val, "Unknown", null);
+						console.log(i);
+						// while(in_use == true) {
+							console.log("i: " + x);
+						    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+						// }
+
+						// in_use = true;
+						var x = i + 1;
+						console.log("i: " + x);
+						console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+						populate(val, "Unknown", null, x);
+						if(numTimes == 11) {
+							console.log("Called");
+						Processing.reload();
+						}
+						
 						attachUserLinks();
 						if(i == results.length - 1) {
 							paginateDekaazs(results.length);
 						}
+						counter_dekaaz++;
+						// in_use = false;
 					}
 
 			});
@@ -566,7 +639,7 @@ YUI().use('node', function(Y) {
 	    alert("Error when retrieving Todos: " + error.code + " " + error.message);
 	  }
 	});
-	
+	//Processing.reload();
 });
 
 /* 
