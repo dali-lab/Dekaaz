@@ -345,6 +345,12 @@ YUI().use('node', function(Y) {
 		var array;
 		Parse.Cloud.run('averageStars', {"query" : str}, {
 		  success: function(data) {
+		  	var curr_user_role;
+			if(Parse.User.current() != null) {
+				curr_user_role = Parse.User.current().get("role");
+			} else {
+				curr_user_role = -1;
+			}
 		  	array = data;
 		    query.containedIn("words", array);
 		    query.include("username");
@@ -361,14 +367,14 @@ YUI().use('node', function(Y) {
 				  		author.fetch({
 						  success: function(author) {
 						    var author_name = author.getUsername();
-						  	populate(val, author.getUsername(), author.id);
+						  	populate(val, author.getUsername(), author.id, i+1, curr_user_role);
 						  	if(i == results.length - 1) {
 								paginateDekaazs(results.length);
 							}
 						  }
 						});
 					} else {
-						populate(val, "Unknown", null);
+						populate(val, "Unknown", null, i+1, curr_user_role);
 						if(i == results.length - 1) {
 							paginateDekaazs(results.length);
 						}
