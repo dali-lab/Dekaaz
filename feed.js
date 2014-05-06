@@ -15,6 +15,15 @@ var numTimes = 0;
     }
  }
 
+ function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
 function logoutFunc() {
 	$("#logout-button").attr("disabled", "disabled");
 
@@ -487,7 +496,9 @@ YUI().use('node', function(Y) {
 	query = new Parse.Query(Dekaaz);
 	// query.limit(10);
 	query.descending('createdAt');
-	// var in_use = false;
+	var in_use = false;
+	var counter_dekaaz = 0;
+	console.log("ready");
 	query.find({
 	  success: function(results) {
 			if (results.length > 0) {
@@ -495,30 +506,53 @@ YUI().use('node', function(Y) {
 			}
 			//Append each of the incomplete tasks to the Incomplete List
 			Y.Array.each(results, function(val, i, arr) {
-
+					// console.log("YO");
+					
+					while(counter_dekaaz != i) {
+						var qq = 0;
+					}
 
 			  		var author = val.get('parent');
 			  		if(author != null) {
+			  	// 		while(in_use == true) {
+							
+						// }
+
+						// in_use = true;
+						
 				  		author.fetch({
 						  success: function(author) {
 						    var author_name = author.getUsername();
-
+						    
 						    populate(val, author_name, author.id);
 						    //Processing.reload();
-
+						    console.log(i);
 
 							attachUserLinks();
 							if(i == results.length - 1) {
 								paginateDekaazs(results.length);
 							}
+
+							// in_use = false;
+							// console.log(counter_dekaaz);
+							counter_dekaaz++;
 						  }
 						});
 					} else {
+						console.log(i);
+						// while(in_use == true) {
+							
+						// }
+
+						// in_use = true;
+						
 						populate(val, "Unknown", null);
 						attachUserLinks();
 						if(i == results.length - 1) {
 							paginateDekaazs(results.length);
 						}
+						counter_dekaaz++;
+						// in_use = false;
 					}
 
 			});

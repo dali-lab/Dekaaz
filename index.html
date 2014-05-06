@@ -21,6 +21,7 @@
     var syllable_map = {};
     syllable_map["test"] = "test";
     var ids = new Array();
+    var allpoems = new Array();
 
       Dekaaz = Parse.Object.extend("Dekaaz");
       query = new Parse.Query(Dekaaz);
@@ -34,7 +35,7 @@
             $.each(results, function( index, value ) {
               ids.push(value.id); 
               syllable_map[value.id] = value.get("syllarray");
-              
+              allpoems.push(value.get("line1") + " " + value.get("line2") + " " + value.get("line3"));
             });
             syllable_map["test"] = "nottest";
             // console.log(syllable_map);
@@ -58,13 +59,15 @@
       
       console.log(syllable_map);
 
-      var ret = syllable_map[ids[10-xx]];
-      xx++;
+      var ret = syllable_map[ids[xx]];
       console.log("SSS");
+      console.log(allpoems[xx]);
       console.log(xx);
-      console.log(ids);
-      console.log(ids[10-xx]);
+      // console.log(ids);
+      console.log(ids[xx]);
       console.log(ret);
+      
+      xx++;
       return ret;
     }
 
