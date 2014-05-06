@@ -186,7 +186,14 @@ YUI().use('node', function(Y) {
 
 	});
 
-	function populate(val, owner_param, owner_id_param) {
+	function createLists(num) {
+		$('#incomplete-items').empty();
+		for(var i = 0; i<num; i++) {
+			$('#incomplete-items').append('<li class="list-item" style="display: none;"></li>');
+		}
+	}
+
+	function populate(val, owner_param, owner_id_param, child_num) {
 
 
 		// console.log(Parse.User.current().get('role'));
@@ -211,7 +218,8 @@ YUI().use('node', function(Y) {
 				id: val.id,
 			});
 
-			incompleteItemList.prepend(content);
+			$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
+			// incompleteItemList.prepend(content);
 			
 			// Parse.User.current().fetch({
 		 //  	success: function(author) {
@@ -237,7 +245,7 @@ YUI().use('node', function(Y) {
 				audio: audioHTML,
 				id: val.id,
 			});
-			incompleteItemList.prepend(content);
+			$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
 		}
 
 		// The following three variables are arrays of integers that hold the syllable
@@ -249,11 +257,8 @@ YUI().use('node', function(Y) {
 		// This line sets the image. I have set it to be Logo.png, but you can
 		// set the image with Processing, given the three arrays of int's directly above.
 		//$('#incomplete-items:first>li img').attr('src', 'images/Logo.png');
-		
-		if(numTimes == 10) {
-		Processing.reload();
-		}
 		numTimes++;
+		
 	}
 
 	/* Search Dekaazs */
@@ -504,27 +509,36 @@ YUI().use('node', function(Y) {
 			if (results.length > 0) {
 				noTasksMessage.addClass('hidden');
 			}
+
+			createLists(results.length);
+
 			//Append each of the incomplete tasks to the Incomplete List
 			Y.Array.each(results, function(val, i, arr) {
 					// console.log("YO");
 					
-					while(counter_dekaaz != i) {
-						var qq = 0;
-					}
-
+					// while(counter_dekaaz != i) {
+					// 	var qq = 0;
+					// }
+					console.log("numtimes: " + numTimes);
 			  		var author = val.get('parent');
 			  		if(author != null) {
 			  	// 		while(in_use == true) {
 							
 						// }
-
+						var x = i + 1;
 						// in_use = true;
 						
 				  		author.fetch({
 						  success: function(author) {
 						    var author_name = author.getUsername();
-						    
-						    populate(val, author_name, author.id);
+						    console.log("i: " + x);
+						    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+						    populate(val, author_name, author.id, x);
+						    if(numTimes == 11) {
+						    	console.log("Called");
+								Processing.reload();
+							}
+							// numTimes++;
 						    //Processing.reload();
 						    console.log(i);
 
@@ -541,12 +555,20 @@ YUI().use('node', function(Y) {
 					} else {
 						console.log(i);
 						// while(in_use == true) {
-							
+							console.log("i: " + x);
+						    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
 						// }
 
 						// in_use = true;
+						var x = i + 1;
+						console.log("i: " + x);
+						console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+						populate(val, "Unknown", null, x);
+						if(numTimes == 11) {
+							console.log("Called");
+						Processing.reload();
+						}
 						
-						populate(val, "Unknown", null);
 						attachUserLinks();
 						if(i == results.length - 1) {
 							paginateDekaazs(results.length);
