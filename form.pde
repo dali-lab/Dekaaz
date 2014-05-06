@@ -15,7 +15,9 @@ for (int i = 0; i < 7; i++) {
     connections[i] = random(1) < 0.5;
 }
 
-boolean[] connections = (boolean[]) getSyllableArray()['vl8ndncgZm'];
+//boolean[] connections = (boolean[]) getSyllableArray()['vl8ndncgZm'];
+
+boolean[] connections = (boolean[]) getSyllableArray();
 
 class Dot {
 	float x, y;
