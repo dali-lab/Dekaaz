@@ -334,7 +334,7 @@ ul { padding: 0; }
 	
 		<!-- HTML for SEARCH BAR; the Javascript for loading the results of the search can be found in "feed.js" under "Search Dekaazs" section -->
 		<form style="width: 100%;" id="tfnewsearch" method="get" class="dekaaz_search" >
-		        <input style="width: 80%;" type="text" class="tftextinput" name="q" size="21" maxlength="120">
+		        <input style="width: 70%;" type="text" class="tftextinput" name="q" size="21" maxlength="120">
             <input type="submit" value="search" class="tfbutton" style="border-right:solid 1px black; border: solid 1px black !important; width: 20%;">
 		</form>
 	
@@ -386,6 +386,10 @@ ul { padding: 0; }
         <div style="display: inline-block; width: 47%; ">
         {line1}<br/>{line2}<br/>{line3}<br/>Author: {owner}<br/>
         {audio}
+        <!--delete button for admin-->
+        <br/>
+        <input style="text-align: left !important; height: 40px; " type="button" class="deleteBtn" id="{id}" value="Delete" onClick="deletePoem(id)">
+        <br> 
         </div>
         <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
         <canvas id="mysketch-{id}" data-processing-sources="form.pde" style="max-height: 100px; max-width 100px; float: right;"></canvas>

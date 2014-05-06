@@ -211,7 +211,7 @@ YUI().use('node', function(Y) {
 		}
 	}
 
-	function populate(val, owner_param, owner_id_param, child_num) {
+	function populate(val, owner_param, owner_id_param, child_num, role) {
 
 
 		// console.log(Parse.User.current().get('role'));
@@ -266,44 +266,46 @@ YUI().use('node', function(Y) {
 				id: val.id,
 			});
 
+			$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
 			// attach the items to the html file
-			incompleteItemList.prepend(content);
+			// incompleteItemList.prepend(content);
 
 			// get the role type of the user
-			var author = Parse.User.current();
-			if(author != null) {
+			// var author = Parse.User.current();
+			// if(author != null) {
 
-			author.fetch({
-		  	success: function(author) {
-		  		if(author.get('role') == 0) {
+			// author.fetch({
+		 //  	success: function(author) {
+		  		
+
+
+		}
+		console.log("Role: " + role);
+		if(role == 0) {
 		  			// $(document).ready(function(){
  				 	// $("#poem_delete").hide();
   					// });
 		  			// document.write("-- <b>bold</b> <font color=red> red </font>--");
 		  			// $("#poem_delete")
-		  		} else if(author.get('role') == 1) {
+		  		} else if(role == 1) {
 		  			// Y.one('#poem_delete').hide;
 		  			$(document).ready(function(){
  				 	$(".deleteBtn").hide();
   					});
 		  		} 
-		  	  },
-		  	 error: function(error) {
-			    alert("Error when retrieving: " + error.code + " " + error.message);
-			  }
-		  	});
+		  	//   },
+		  	//  error: function(error) {
+			  //   alert("Error when retrieving: " + error.code + " " + error.message);
+			  // }
+		  	// });
 
 		  	// visitors
-			} else {
+			 else {
 				// Y.one('#poem_delete').hide;
 		  		$(document).ready(function(){
  				$(".deleteBtn").hide();
   				});
 			}
-
-			$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
-
-		}
 
 		// The following three variables are arrays of integers that hold the syllable
 		// counts for each word of each line of the Dekaaz
@@ -559,6 +561,12 @@ YUI().use('node', function(Y) {
 	var in_use = false;
 	var counter_dekaaz = 0;
 	console.log("ready");
+	var curr_user_role;
+	if(Parse.User.current() != null) {
+		curr_user_role = Parse.User.current().get("role");
+	} else {
+		curr_user_role = -1;
+	}
 	query.find({
 	  success: function(results) {
 			if (results.length > 0) {
@@ -588,7 +596,7 @@ YUI().use('node', function(Y) {
 						    var author_name = author.getUsername();
 						    console.log("i: " + x);
 						    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
-						    populate(val, author_name, author.id, x);
+						    populate(val, author_name, author.id, x, curr_user_role);
 						    if(numTimes == 11) {
 						    	console.log("Called");
 								Processing.reload();
@@ -618,7 +626,7 @@ YUI().use('node', function(Y) {
 						var x = i + 1;
 						console.log("i: " + x);
 						console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
-						populate(val, "Unknown", null, x);
+						populate(val, "Unknown", null, x, curr_user_role);
 						if(numTimes == 11) {
 							console.log("Called");
 						Processing.reload();
