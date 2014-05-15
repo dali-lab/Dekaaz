@@ -16,11 +16,10 @@
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
   <script src="https://croak.it/talk/croakit_talk.js"></script>
-  <script type="text/javascript" src="croakit.js"></script>
   <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
   <script type="text/javascript" src="parse.js"></script>
 
-  <script type="text/javascript" src="processing.js"></script>
+<!--  <script type="text/javascript" src="processing.js"></script>-->
 <link href="css/twitter-bootstrap.css" rel="stylesheet">
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>

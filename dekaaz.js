@@ -98,45 +98,45 @@ function individualizeDekaazs(num) {
     // attachPaginationEvents(Math.ceil(num/10));
 }
 
-function goToPage(num) {
-	$('#incomplete-items li').slice(0, num*10-10).hide();
-	$('#incomplete-items li').slice(num*10-10, num*10).show();
-	$('#incomplete-items li').slice(num*10).hide();
-	$('.active').removeClass('active');
-	$('#' + num).addClass('active');
+// function goToPage(num) {
+// 	$('#incomplete-items li').slice(0, num*10-10).hide();
+// 	$('#incomplete-items li').slice(num*10-10, num*10).show();
+// 	$('#incomplete-items li').slice(num*10).hide();
+// 	$('.active').removeClass('active');
+// 	$('#' + num).addClass('active');
 	
-}
+// }
 
-function goToPreviousPage() {
-	var num = $('.active').attr('id');
-	if(num-1 >= 1) {
-		goToPage(num-1);
-	}
-}
+// function goToPreviousPage() {
+// 	var num = $('.active').attr('id');
+// 	if(num-1 >= 1) {
+// 		goToPage(num-1);
+// 	}
+// }
 
-function goToAfterPage(maxnum) {
-	// alert(maxnum);
-	var num = parseInt($('.active:last').attr('id'));
-	// alert(maxnum);
-	// alert(num);
-	// alert(num+1 <= maxnum);
-	// alert(num+1);
-	// alert(maxnum);
-	if(num+1 <= maxnum) {
-		// alert(maxnum);
-		// alert(num+1);
-		goToPage(num+1);
-	}
-}
+// function goToAfterPage(maxnum) {
+// 	// alert(maxnum);
+// 	var num = parseInt($('.active:last').attr('id'));
+// 	// alert(maxnum);
+// 	// alert(num);
+// 	// alert(num+1 <= maxnum);
+// 	// alert(num+1);
+// 	// alert(maxnum);
+// 	if(num+1 <= maxnum) {
+// 		// alert(maxnum);
+// 		// alert(num+1);
+// 		goToPage(num+1);
+// 	}
+// }
 
-function attachPaginationEvents(num) {
- 	for (var i=1; i<=Math.floor(num/10); i++)
-  	{
-  		$('#' + i).click(function() {
-  			return false;
-  		});
-  	}
-}
+// function attachPaginationEvents(num) {
+//  	for (var i=1; i<=Math.floor(num/10); i++)
+//   	{
+//   		$('#' + i).click(function() {
+//   			return false;
+//   		});
+//   	}
+// }
 
 function getCookie(cname)
 {
@@ -156,6 +156,26 @@ function setCookie(cname,cvalue,exdays)
 	d.setTime(d.getTime()+(exdays*24*60*60*1000));
 	var expires = "expires="+d.toGMTString();
 	document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+// delete poem
+function deletePoem(id) {
+	console.log("id is " + id);
+	var Dekaaz = Parse.Object.extend("Dekaaz");
+	var query = new Parse.Query(Dekaaz);
+	query.get(id, {
+		success: function(DekaazRow) {
+			// The object was retrieved successfully.
+			DekaazRow.destroy({});
+			document.location.reload();
+		},
+		error: function(object, error) {
+
+		}
+	});
+
+	return false;
+	// var object = query.find(id);
 }
 
 YUI().use('node', function(Y) {
@@ -224,7 +244,17 @@ YUI().use('node', function(Y) {
 
 	});
 
-	function populate(val, owner_param, owner_id_param) {
+	function populate(val, owner_param, owner_id_param, role) {
+
+		var syllarray = val.get("syllarray");
+		var num = 0;
+		for(var index_syllarray = 0; index_syllarray < syllarray.length; index_syllarray++) {
+			var weight = Math.pow(2, syllarray.length - index_syllarray - 1);
+			num += syllarray[index_syllarray]*weight;
+
+		}
+
+		var fileName = "" + num + ".png";
 
 		if(owner_id_param == null) {
 			var audioHTML;
@@ -242,6 +272,7 @@ YUI().use('node', function(Y) {
 				createdAt: val.get('createdAt'),
 				audio: audioHTML,
 				id: val.id,
+				file: fileName,
 			});
 			incompleteItemList.prepend(content);
 		} else {
@@ -260,6 +291,7 @@ YUI().use('node', function(Y) {
 				createdAt: val.get('createdAt'),
 				audio: audioHTML,
 				id: val.id,
+				file: fileName,
 			});
 			incompleteItemList.prepend(content);
 		}
@@ -272,7 +304,7 @@ YUI().use('node', function(Y) {
 
 		// This line sets the image. I have set it to be Logo.png, but you can
 		// set the image with Processing, given the three arrays of int's directly above.
-		$('#incomplete-items:first>li img').attr('src', 'images/Logo.png');
+		// $('#incomplete-items:first>li img').attr('src', 'images/Logo.png');
 	}
 
 	/* Search Dekaazs */

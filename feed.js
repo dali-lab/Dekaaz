@@ -15,15 +15,6 @@ var numTimes = 0;
     }
  }
 
- function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
-
 function logoutFunc() {
 	$("#logout-button").attr("disabled", "disabled");
 
@@ -132,6 +123,7 @@ function setCookie(cname,cvalue,exdays)
 
 // delete poem
 function deletePoem(id) {
+	console.log("id is " + id);
 	var Dekaaz = Parse.Object.extend("Dekaaz");
 	var query = new Parse.Query(Dekaaz);
 	query.get(id, {
@@ -144,6 +136,8 @@ function deletePoem(id) {
 
 		}
 	});
+
+	return false;
 	// var object = query.find(id);
 }
 
@@ -151,14 +145,14 @@ YUI().use('node', function(Y) {
 	
 	var Dekaaz, 
 	query,
-	noTasksMessage = Y.one('#no-incomplete-message'),
-	submitBtn = Y.one("#poem-submit"),
-	incompleteItemList = Y.one('#incomplete-items'),
-	accountInfo = Y.one('body'),
-	completeItemList = Y.one('#complete-items'),
-	input1 = Y.one("#poem-input-1"),
-	input2 = Y.one("#poem-input-2"),
-	input3 = Y.one("#poem-input-3");
+	noTasksMessage = $('#no-incomplete-message'),
+	submitBtn = $("#poem-submit"),
+	incompleteItemList = $('#incomplete-items'),
+	accountInfo = $('body'),
+	completeItemList = $('#complete-items'),
+	input1 = $("#poem-input-1"),
+	input2 = $("#poem-input-2"),
+	input3 = $("#poem-input-3");
 
 	/* Top Navigation Bar: when the page is ready, get the current user's username, and pass the username to the 
 	script tag identified by '#account-info', which will generate HTML code. This HTML code is saved in the content
@@ -168,6 +162,8 @@ YUI().use('node', function(Y) {
 		var currentUser = Parse.User.current();
 		
 		var name;
+		var mess;
+
 		if (currentUser) {
 			var username;
 			if(Parse.FacebookUtils.isLinked(currentUser)) {
@@ -184,23 +180,19 @@ YUI().use('node', function(Y) {
 			/* initialize content to hold the HTML under '#account-info' script tag in index.html */
 			mess = "Log Out";
 			/* initialize content to hold the HTML under '#account-info' script tag in index.html */
-			var content = Y.Lang.sub(Y.one('#account-info').getHTML(), {
-				greeting: name,
-				message: mess
-			});
-
-			accountInfo.prepend(content);
+			
 		} else {
 			name = "No Account";
 			mess = "Log In";
 			/* initialize content to hold the HTML under '#account-info' script tag in index.html */
-			var content = Y.Lang.sub(Y.one('#account-info').getHTML(), {
-				greeting: name,
-				message: mess
-			});
-
-			accountInfo.prepend(content);
 		}
+
+		var content = Y.Lang.sub(Y.one('#account-info').getHTML(), {
+			greeting: name,
+			message: mess
+		});
+
+		accountInfo.prepend(content);
 
 	});
 
@@ -219,6 +211,16 @@ YUI().use('node', function(Y) {
 		// 	console.log(Parse.User.current().get('role'));
 		// }
 
+		var syllarray = val.get("syllarray");
+		var num = 0;
+		for(var index_syllarray = 0; index_syllarray < syllarray.length; index_syllarray++) {
+			var weight = Math.pow(2, syllarray.length - index_syllarray - 1);
+			num += syllarray[index_syllarray]*weight;
+
+		}
+
+		var fileName = "" + num + ".png";
+
 		if(owner_id_param == null) {
 			var audioHTML;
 			if(val.get('Sound') != null) {
@@ -226,6 +228,8 @@ YUI().use('node', function(Y) {
 			} else {
 				audioHTML = 'NO AUDIO AVAILABLE';
 			}
+
+			
 
 			var content = Y.Lang.sub(Y.one('#todo-items-template-no-account').getHTML(), {
 				line1: val.get('line1'),
@@ -235,9 +239,14 @@ YUI().use('node', function(Y) {
 				createdAt: val.get('createdAt'),
 				audio: audioHTML,
 				id: val.id,
+				file: fileName,
 			});
 
-			$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
+			if(child_num == -1) {
+				$('#incomplete-items').prepend('<li>' + content + '</li>');
+			} else {
+				$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
+			}
 			// incompleteItemList.prepend(content);
 			
 			// Parse.User.current().fetch({
@@ -264,9 +273,14 @@ YUI().use('node', function(Y) {
 				createdAt: val.get('createdAt'),
 				audio: audioHTML,
 				id: val.id,
+				file: fileName,
 			});
 
-			$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
+			if(child_num == -1) {
+				$('#incomplete-items').prepend('<li>' + content + '</li>');
+			} else {
+				$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
+			}
 			// attach the items to the html file
 			// incompleteItemList.prepend(content);
 
@@ -536,13 +550,22 @@ YUI().use('node', function(Y) {
 		  	}
 				noTasksMessage.addClass('hidden');
 				var owner_name;
+				var curr_user_role = -1;
 				if(Parse.User.current() != null) {
 					console.log(Parse.User.current().get("username"));
 					owner_name = Parse.User.current().getUsername();
-					populate(item, owner_name, Parse.User.current().id);
+					alert("ID " + Parse.User.current().id);
+
+					Parse.User.current().fetch({
+						success: function(author) {
+							curr_user_role = author.get('role');
+							populate(item, owner_name, Parse.User.current().id, -1, curr_user_role);
+						}
+					});
+
 				} else {
 					owner_name = "Unknown";
-					populate(item, owner_name, null);
+					populate(item, owner_name, null, -1, curr_user_role);
 				}
 
 				input1.set('value', '').focus();
@@ -567,98 +590,103 @@ YUI().use('node', function(Y) {
 	var in_use = false;
 	var counter_dekaaz = 0;
 	console.log("ready");
-	var curr_user_role;
+	var curr_user_role = -1;
 	var curr_user_var = Parse.User.current();
 	if(curr_user_var != null) {
 		curr_user_var.fetch({
 			success: function(author) {
 				curr_user_role = author.get('role');
+
+
+
+				query.find({
+				  success: function(results) {
+						if (results.length > 0) {
+							noTasksMessage.addClass('hidden');
+						}
+
+						createLists(results.length);
+
+						//Append each of the incomplete tasks to the Incomplete List
+						Y.Array.each(results, function(val, i, arr) {
+								// console.log("YO");
+								
+								// while(counter_dekaaz != i) {
+								// 	var qq = 0;
+								// }
+								console.log("numtimes: " + numTimes);
+						  		var author = val.get('parent');
+						  		if(author != null) {
+						  	// 		while(in_use == true) {
+										
+									// }
+									var x = i + 1;
+									// in_use = true;
+									
+							  		author.fetch({
+									  success: function(author) {
+									    var author_name = author.getUsername();
+									    console.log("i: " + x);
+									    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+									    populate(val, author_name, author.id, x, curr_user_role);
+									    if(numTimes == 11) {
+									    	console.log("Called");
+											// Processing.reload();
+										}
+										// numTimes++;
+									    //Processing.reload();
+									    console.log(i);
+
+										attachUserLinks();
+										if(i == results.length - 1) {
+											paginateDekaazs(results.length);
+										}
+
+										// in_use = false;
+										// console.log(counter_dekaaz);
+										counter_dekaaz++;
+									  }
+									});
+								} else {
+									console.log(i);
+									// while(in_use == true) {
+										console.log("i: " + x);
+									    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+									// }
+
+									// in_use = true;
+									var x = i + 1;
+									console.log("i: " + x);
+									console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+									populate(val, "Unknown", null, x, curr_user_role);
+									if(numTimes == 11) {
+										console.log("Called");
+									// Processing.reload();
+									}
+									
+									attachUserLinks();
+									if(i == results.length - 1) {
+										paginateDekaazs(results.length);
+									}
+									counter_dekaaz++;
+									// in_use = false;
+								}
+
+						});
+						
+				  },
+				  error: function(error) {
+				    alert("Error when retrieving Todos: " + error.code + " " + error.message);
+				  }
+				});
+
+
+
 			}
 		});
-	} else {
-		curr_user_role = -1;
-	}
+	} 
 	console.log("FIrst role: " + curr_user_role);
-	query.find({
-	  success: function(results) {
-			if (results.length > 0) {
-				noTasksMessage.addClass('hidden');
-			}
 
-			createLists(results.length);
-
-			//Append each of the incomplete tasks to the Incomplete List
-			Y.Array.each(results, function(val, i, arr) {
-					// console.log("YO");
-					
-					// while(counter_dekaaz != i) {
-					// 	var qq = 0;
-					// }
-					console.log("numtimes: " + numTimes);
-			  		var author = val.get('parent');
-			  		if(author != null) {
-			  	// 		while(in_use == true) {
-							
-						// }
-						var x = i + 1;
-						// in_use = true;
-						
-				  		author.fetch({
-						  success: function(author) {
-						    var author_name = author.getUsername();
-						    console.log("i: " + x);
-						    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
-						    populate(val, author_name, author.id, x, curr_user_role);
-						    if(numTimes == 11) {
-						    	console.log("Called");
-								Processing.reload();
-							}
-							// numTimes++;
-						    //Processing.reload();
-						    console.log(i);
-
-							attachUserLinks();
-							if(i == results.length - 1) {
-								paginateDekaazs(results.length);
-							}
-
-							// in_use = false;
-							// console.log(counter_dekaaz);
-							counter_dekaaz++;
-						  }
-						});
-					} else {
-						console.log(i);
-						// while(in_use == true) {
-							console.log("i: " + x);
-						    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
-						// }
-
-						// in_use = true;
-						var x = i + 1;
-						console.log("i: " + x);
-						console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
-						populate(val, "Unknown", null, x, curr_user_role);
-						if(numTimes == 11) {
-							console.log("Called");
-						Processing.reload();
-						}
-						
-						attachUserLinks();
-						if(i == results.length - 1) {
-							paginateDekaazs(results.length);
-						}
-						counter_dekaaz++;
-						// in_use = false;
-					}
-
-			});
-			
-	  },
-	  error: function(error) {
-	    alert("Error when retrieving Todos: " + error.code + " " + error.message);
-	  }
-	});
 	//Processing.reload();
 });
 
