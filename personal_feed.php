@@ -200,12 +200,12 @@ ul { padding: 0; }
 	on the left, and a greeting on the right.
 	The code is executed when the user logs in, and is redirected to this page. Look at the "Top Navigation Bar" section in "feed.js" file to see the actual code.
   -->
-  <!--<script id="account-info" type="x/handlebars"><div style="text-align: right; width: 620px; margin: auto; background: white; padding: 0px 0px;"><div class="left" style="text-align: left !important;"><a href="about.html">About</a> | <a href="index.html" >Compose</a> | <a href="signup.html" id="logout-button">Log Out</a></div><div class="right">Welcome, {username}! </div></div></script>-->
+  
 <!-- dropdown menu code from: http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-dropdowns.php -->
 <script id="account-info" type="x/handlebars">
 <div id="top-bar" style="text-align: right; width: 700px; margin: auto; background: white; padding: 0px 0px;"><ul class="nav nav-pills" style="margin-top: 5px;">
     <li><a href="home.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="about.php">About</a></li>
     <li><a href="dekaaz.php" >Dekaaz</a></li>
     <li class="active"><a href="index.html" >Compose</a></li>
     <li><a href="#" onClick="logoutFunc()" id="logout-button">{message}</a></li>
@@ -325,7 +325,7 @@ ul { padding: 0; }
   </ul>
 </div>-->
 
-	<!--<div style="float: center; "><a href="about.html">About</a> | <a href="index.html" >Create a Dekaaz</a> | <a href="signup.html">Sign Up</a> </div>-->
+	
 </body>
 
 </html>

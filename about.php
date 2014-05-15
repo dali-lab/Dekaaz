@@ -1,9 +1,15 @@
-<html>
+<?php include_once("header.php"); ?>
+
+<img src="images/Dekaaz How.png" style="height: auto; width: 60%;"/><br/><br/>
+
+<?php include_once("footer.php"); ?>
+
+<!--<html>
 <head>
   <meta charset="utf-8">
 
   <title>Dekaaz</title>
-    <meta name="description" content="My Parse App">
+  <meta name="description" content="My Parse App">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -63,6 +69,6 @@
 </head>
 <body style="text-align: center; ">
 	<img src="images/Dekaaz How.png" style="height: auto; width: 60%;"/><br/><br/>
-<div style="float: center; "><a href="about.html">About</a> | <a href="index.html" >Create a Dekaaz</a> | <a href="signup.html">Sign Up</a></div><br/><br/>
+<div style="float: center; "><a href="about.php">About</a> | <a href="index.html" >Create a Dekaaz</a> | <a href="signup.html">Sign Up</a></div><br/><br/>
 	</body>
-	</html>
+	</html>-->

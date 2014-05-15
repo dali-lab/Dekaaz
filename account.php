@@ -2,7 +2,7 @@
 
 <script>
 
-YUI().use('node', function(Y) {
+        YUI().use('node', function(Y) {
           $('.microposts').empty();
           var q = new Parse.Query("User");
           q.get(getCookie("user_account"), {

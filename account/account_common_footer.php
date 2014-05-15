@@ -17,18 +17,14 @@
       var currentUser = Parse.User.current();
       
       var name;
-      // alert(currentUser);
+      
       if (currentUser) {
         var username;
-        // alert("first");
-        // alert(Parse.FacebookUtils.isLinked(currentUser));
-        if(Parse.FacebookUtils.isLinked(currentUser)) {
-        // alert(currentUser.get("authData"));
-        // alert(currentUser.get("authData").facebook);
         
-        // if(currentUser.get("authData") !== undefined 
-        //  && currentUser.get("authData").facebook !== undefined) {
-          // alert("1");
+        if(Parse.FacebookUtils.isLinked(currentUser)) {
+        
+        
+      
           FB.getLoginStatus(function(response) {
             if (response.status != 'connected') {
               Parse.User.logOut();

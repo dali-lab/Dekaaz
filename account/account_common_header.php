@@ -284,7 +284,7 @@ if(Parse.User.current() == null) {
   <script id="account-info" type="x/handlebars">
 <div id="top-bar" style="text-align: right; width: 700px; margin: auto; background: white; padding: 0px 0px;"><ul class="nav nav-pills" style="margin-top: 5px;">
     <li><a href="home.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="about.php">About</a></li>
     <li><a href="dekaaz.php" >Dekaaz</a></li>
     <li class="active"><a href="index.html" >Compose</a></li>
     <li><a href="#" onClick="logoutFunc()" id="logout-button">{message}</a></li>
@@ -298,15 +298,7 @@ if(Parse.User.current() == null) {
             <li><a href="#">Trash</a></li>-->
         </ul>
     </li>
-    <!--<li class="dropdown pull-right">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Settings</a></li>
-        </ul>
-    </li>-->
+    
     <li class="dropdown pull-right"><a>{greeting}</a></li>
 </ul></div>
 </script>
@@ -317,25 +309,18 @@ if(Parse.User.current() == null) {
       <section id="current_user_info">
         <?php include_once("user_info.html"); ?>
       </section>
-      <!--<section>
-        <%= render 'shared/stats' %>
-      </section>
-      <section>
-        <%= render 'shared/micropost_form' %>
-      </section>-->
+      
     </aside>
     <div class="span8">
 
         <script id="unfollowing_button" type="x/handlebars">
         <form accept-charset="UTF-8" class="edit_relationship">
-        <!--<div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="delete"></div>
-        -->  <input class="btn btn-large" name="commit" id="unfollow" type="submit" value="Unfollow">
+          <input class="btn btn-large" name="commit" id="unfollow" type="submit" value="Unfollow">
         </form>
         </script>
         <script id="following_button" type="x/handlebars">
         <form accept-charset="UTF-8" class="edit_relationship">
-        <!--<div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="delete"></div>
-        -->  <input class="btn btn-large" name="commit" id="follow" type="submit" value="Follow">
+          <input class="btn btn-large" name="commit" id="follow" type="submit" value="Follow">
         </form>
         </script>
 
@@ -369,7 +354,6 @@ YUI().use('node', function(Y) {
 
 
                   return false;
-                  // window.location.href = "account.php";
                 });
 
               }
@@ -398,7 +382,6 @@ YUI().use('node', function(Y) {
 
 
                   return false;
-                  // window.location.href = "account.php";
                 });
 
               }
@@ -415,20 +398,11 @@ YUI().use('node', function(Y) {
 
             <script id="todo-items-template" type="x/handlebars">
               <li id="{id}">
-                <!--<a href="/users/1"><img alt="Example User" class="gravatar" src="https://secure.gravatar.com/avatar/bebfcf57d6d8277d806a9ef3385c078d?s=52"></a>-->
-                <!--<%= link_to gravatar_for(feed_item.user), feed_item.user %>-->
-                  <!--<span class="user">
-                    <a href="/users/6">Javier Shanahan I</a>
-                  </span>-->
                   <span class="content">{line1}<br/>{line2}<br/>{line3}<br/></span>
                   <span class="timestamp">
                     Posted at: {createdAt}
                   </span>
-                <!--<% if current_user?(feed_item.user) %>
-                  <%= link_to "delete", feed_item, method: :delete,
-                                                   data: { confirm: "You sure?" },
-                                                   title: feed_item.content %>
-                <% end %>-->
+                
               </li>
             </script>
 
@@ -445,28 +419,6 @@ YUI().use('node', function(Y) {
         }
       return "";
     }
-    // alert(getCookie("user_account"));
-    // var q = new Parse.Query("User");
-    // q.get(getCookie("user_account"), {
-    //   success: function(curr_user) {
-    //     var q_posts = curr_user.relation("Post").query();
-    //     q_posts.find({
-    //       success: function(results) {
-    //         console.log(results);
-    //         // results is an array of Parse.Object.
-    //       },
-
-    //       error: function(error) {
-    //         // error is an instance of Parse.Error.
-    //       }
-    //     });
-    //     // The object was retrieved successfully.
-    //   },
-    //   error: function(object, error) {
-    //     // The object was not retrieved successfully.
-    //     // error is a Parse.Error with an error code and description.
-    //   }
-    // });
     
   </script>
 
