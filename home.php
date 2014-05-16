@@ -257,6 +257,7 @@
         <!-- end copy/paste -->
       </div>
       </div>
+        <script type="text/javascript" src="utils.js"></script>
         <script type="text/javascript" src="home.js"></script>
       </body>
 </html>

@@ -165,6 +165,7 @@
     
   </script>
 	<!-- The feed that contains all the parse JS stuff, keys, etc-->
+  <script type="text/javascript" src="utils.js"></script>
 	<script type="text/javascript" src="feed.js">
 	</script>
 	<script id="bottom_paginator" type="x/handlebars">

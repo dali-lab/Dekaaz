@@ -220,7 +220,7 @@ ul { padding: 0; }
     <li><a href="home.php">Home</a></li>
     <li><a href="about.php">About</a></li>
     <li><a href="dekaaz.php" >Dekaaz</a></li>
-    <li class="active"><a href="index.html" >Compose</a></li>
+    <li class="active"><a href="index.php" >Compose</a></li>
     <li><a href="#" onClick="logoutFunc()" id="logout-button">{message}</a></li>
     <li class="dropdown">
         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Account <b class="caret"></b></a>

@@ -56,7 +56,12 @@
       });
     </script>
 
-<?php include_once("footer.php"); ?>
+  </div>
+
+    <script type="text/javascript" src="utils.js"></script>
+    <script type="text/javascript" src="dekaaz.js"></script>
+</body>
+</html>
 
 <!--
     <?php include_once("header.php"); ?>

@@ -1,39 +1,5 @@
-Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8jzS98f3yVLTtza17J2zqGBx");
 
-var soundFile;
 var numTimes = 0;
-
- function croakCallbackFunction(croak_id,croakmp3source,callbackCode)
- {
-    if(callbackCode==1){
-           
-           var str = '<audio controls><source src="' + croakmp3source + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
-           
-           soundFile = croakmp3source;
-		   $('#audio').html(str);
-
-    }
- }
-
-function logoutFunc() {
-	$("#logout-button").attr("disabled", "disabled");
-
-	Parse.User.logOut();
-	window.location.href = "signup.html";
-}
-
-function getRealUsername(user) {
-
-	return user.getUsername();
-}
-
-function attachUserLinks() {
-	$(".user").click(function() {
-		setCookie("user_account", $(this).attr('id'), 1);
-		window.location.href = "account.php";
-	});
-}
-
 
 YUI().use('node', function(Y) {
 	
