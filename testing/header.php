@@ -5,27 +5,22 @@
   <title>Dekaaz</title>
   <meta name="description" content="Dekaaz App">
   <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <link href="css/twitter-bootstrap.css" rel="stylesheet">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+
   <script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "3b8f0c68-515f-47b3-9466-8ea8a1762008", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 
   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
   <script src="https://croak.it/talk/croakit_talk.js"></script>
   <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
   <script type="text/javascript" src="parse.js"></script>
 
-
-  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-
-  <script type="text/javascript">stLight.options({publisher: "3b8f0c68-515f-47b3-9466-8ea8a1762008", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-
-  
-
 <!--  <script type="text/javascript" src="processing.js"></script>-->
-
+<link href="css/twitter-bootstrap.css" rel="stylesheet">
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -217,7 +212,7 @@ ul { padding: 0; }
 <!-- dropdown menu code from: http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-dropdowns.php -->
 <script id="account-info" type="x/handlebars">
 <div id="top-bar" style="text-align: right; width: 700px; margin: auto; background: white; padding: 0px 0px;"><ul class="nav nav-pills" style="margin-top: 5px;">
-    <li><a href="home.php">Home</a></li>
+    <li><a href="home.html">Home</a></li>
     <li><a href="about.php">About</a></li>
     <li><a href="dekaaz.php" >Dekaaz</a></li>
     <li class="active"><a href="index.html" >Compose</a></li>
@@ -245,5 +240,5 @@ ul { padding: 0; }
 </ul></div>
 </script>
 
-  <!--<h1><img src="images/dekaaz.png" style="padding-top: 10px; height: auto; max-width: 400px;"/></h1>
-  <div id="main" style="background-color: #F5F5F5; margin-bottom: 20px;">-->
+  <h1><img src="images/dekaaz.png" style="padding-top: 10px; height: auto; max-width: 400px;"/></h1>
+  <div id="main" style="background-color: #F5F5F5; margin-bottom: 20px;">

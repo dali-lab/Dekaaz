@@ -5,20 +5,10 @@ var soundFile;
  function croakCallbackFunction(croak_id,croakmp3source,callbackCode)
  {
     if(callbackCode==1){
-           // alert('talk_id '+croak_id);
-           // var str = '<audio controls><source src="' + croakmp3source + '" type="audio/mpeg">Your browser does not support this audio format.</audio>';
            var str = '<audio src="' + croakmp3source + '" controls="controls"></audio>';
-           // alert("HI");
            soundFile = croakmp3source;
 		   $('#audio').html(str);
-           // alert("HEY??");
-        //    var audio = $("audio");
-        //    audio[0].pause();
-    	   // audio[0].load();
-        //    // $('audio').show();
-        //    audio[0].play();
-        //    alert("HERE");
-           // alert('talkmp3source '+croakmp3source);
+           
 
     }
  }
