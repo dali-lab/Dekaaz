@@ -1,5 +1,10 @@
 <?php include 'header.php'; ?>
-
+<script>
+var user_acc = "<?php
+  echo $_GET['user_account'];
+?>";
+// console.log("Name is " + name);
+</script>
 <div class="container">
   <div class="row">
     <aside class="span4">
@@ -29,7 +34,7 @@
                 
                 $("#unfollow").click(function() {
                   var q = new Parse.Query("User");
-                  q.get(getCookie("user_account"), {
+                  q.get(getCookie(), {
                     success: function(curr_user) {
 
                       var curr_username = Parse.User.current().getUsername();
@@ -59,7 +64,7 @@ YUI().use('node', function(Y) {
                 
                 $("#follow").click(function() {
                   var q = new Parse.Query("User");
-                  q.get(getCookie("user_account"), {
+                  q.get(getCookie(), {
                     success: function(curr_user) {
                       var curr_username = Parse.User.current().getUsername();
             
@@ -104,16 +109,17 @@ YUI().use('node', function(Y) {
             </script>
             
 <script>
-    function getCookie(cname)
+    function getCookie()
     {
-      var name = cname + "=";
-      var ca = document.cookie.split(';');
-      for(var i=0; i<ca.length; i++) 
-        {
-        var c = ca[i].trim();
-        if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-        }
-      return "";
+      // var name = cname + "=";
+      // var ca = document.cookie.split(';');
+      // for(var i=0; i<ca.length; i++) 
+      //   {
+      //   var c = ca[i].trim();
+      //   if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+      //   }
+      // return "";
+      return user_acc;
     }
     
   </script>
@@ -164,7 +170,7 @@ YUI().use('node', function(Y) {
 
   // YUI().use('node', function(Y) {
       var q = new Parse.Query("User");
-      q.get(getCookie("user_account"), {
+      q.get(getCookie(), {
         success: function(curr_user) {
           if(Parse.User.current() == null) {
             window.location.href = "signup.html";

@@ -27,8 +27,8 @@ function getRealUsername(user) {
 
 function attachUserLinks() {
 	$(".user").click(function() {
-		setCookie("user_account", $(this).attr('id'), 1);
-		window.location.href = "account.php";
+		// setCookie("user_account", $(this).attr('id'), 1);
+		window.location.href = "account.php?user_account=" + $(this).attr('id');
 	});
 }
 
