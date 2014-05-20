@@ -169,10 +169,12 @@ YUI().use('node', function(Y) {
 		var syllarray = val.get("syllarray");
 		var num = 0;
 		for(var index_syllarray = 0; index_syllarray < syllarray.length; index_syllarray++) {
-			var weight = Math.pow(2, syllarray.length - index_syllarray - 1);
+			var weight = Math.pow(2, index_syllarray);
 			num += syllarray[index_syllarray]*weight;
 
 		}
+
+		num++;
 
 		var fileName = "" + num + ".png";
 
