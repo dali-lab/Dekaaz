@@ -251,6 +251,16 @@ YUI().use('node', function(Y) {
   				});
 			}
 
+		console.log("canvasId: " + "mysketch-" + val.id);
+		var canvas = document.getElementById("mysketch-" + val.id);
+		var context = canvas.getContext('2d');
+		var imageObj = new Image();
+        imageObj.onload = function() {
+          context.drawImage(this, 0, 0);
+        };
+
+        imageObj.src = './images/' + fileName;
+
 		// The following three variables are arrays of integers that hold the syllable
 		// counts for each word of each line of the Dekaaz
 		var first_line_syllables = val.get('line1syll');
@@ -298,6 +308,7 @@ YUI().use('node', function(Y) {
 		  	array = data;
 		    query.containedIn("words", array);
 		    query.include("username");
+		    query.include("syllarray");
 			query.find({
 			  success: function(results) {
 			  	console.log(results);

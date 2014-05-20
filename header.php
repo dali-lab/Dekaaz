@@ -5,6 +5,7 @@
   <title>Dekaaz</title>
   <meta name="description" content="Dekaaz App">
   <meta name="viewport" content="width=device-width">
+  
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
   <link href="css/twitter-bootstrap.css" rel="stylesheet">
