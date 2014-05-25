@@ -110,6 +110,15 @@ YUI().use('node', function(Y) {
                 
               </li>
             </script>
+
+            <script id="update-template" type="x/handlebars">
+                  <span class="content">{line1}<br/>{line2}<br/>{line3}<br/></span>
+                  <span class="timestamp">
+                    Posted at: {createdAt}
+                  </span>
+                  <br/>
+                  <input style="text-align: left !important; height: 40px; " class="btnEdit" type="button" id="{id}" value="Edit" >
+            </script>
             
 <script>
     function getCookie()
@@ -168,12 +177,18 @@ YUI().use('node', function(Y) {
                             query.get(poemid, {
                               success: function(object) {
                                 
-                                $("#" + poemid + " .content").empty();
-                                $("#" + poemid + " .content").html(
-                                  object.get("line1") + "<br/>" +
-                                  object.get("line2") + "<br/>" +
-                                  object.get("line3") + "<br/>"
-                                );
+
+
+                                var content = Y.Lang.sub(Y.one('#update-template').getHTML(), {
+                                  line1: object.get('line1'),
+                                  line2: object.get('line2'),
+                                  line3: object.get('line3'),
+                                  createdAt: object.createdAt,
+                                  id: object.id,
+                                });
+
+                                $("#" + poemid).empty();
+                                $("#" + poemid ).html(content);
 
                               },
 
