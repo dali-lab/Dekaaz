@@ -36,19 +36,12 @@
 
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$(".dropdown-toggle").dropdown();
-});  
-</script>
-
-
 <style>
 /*#example ul {
-	width: 100%;
+  width: 100%;
 }
 #example {
-	width: 100%;
+  width: 100%;
 }*/
 body {
   margin: 0;
@@ -57,7 +50,7 @@ body {
   line-height: 18px;
   color: #333333;
   background-color: #ffffff;
-	
+  
   padding: 0 20px;
 }
 a {
@@ -178,10 +171,6 @@ ul { padding: 0; }
   background-color: #fff;
   cursor: default;
 }
-#main {
-  border: solid #ddd;
-  border-width: 1 1px 1px 1px;
-}
 
 </style>
 </head>
@@ -221,42 +210,47 @@ ul { padding: 0; }
 
 
     </script>
-  <!-- 
-  The following script code generates the top navigation bar, with "About", "Compose", and "Log Out" buttons
-  on the left, and a greeting on the right.
-  The code is executed when the user logs in, and is redirected to this page. Look at the "Top Navigation Bar" section in "feed.js" file to see the actual code.
-  -->
-  <!--<script id="account-info" type="x/handlebars"><div style="text-align: right; width: 620px; margin: auto; background: white; padding: 0px 0px;"><div class="left" style="text-align: left !important;"><a href="about.php">About</a> | <a href="index.html" >Compose</a> | <a href="signup.html" id="logout-button">Log Out</a></div><div class="right">Welcome, {username}! </div></div></script>-->
-<!-- dropdown menu code from: http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-dropdowns.php -->
-<script id="account-info" type="x/handlebars">
-<div id="top-bar" style="text-align: right; width: 700px; margin: auto; background: white; padding: 0px 0px;"><ul class="nav nav-pills" style="margin-top: 5px;">
-    <li><a href="home.php">Home</a></li>
-    <li><a href="about.php">About</a></li>
-    <li><a href="dekaaz.php" >Dekaaz</a></li>
-    <li class="active"><a href="index.php" >Compose</a></li>
-    <li><a href="#" onClick="logoutFunc()" id="logout-button">{message}</a></li>
-    <li class="dropdown">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Account <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li><a href="myaccount.php">Profile Page</a></li>
-            <li><a href="personal_feed.php">Personal Feed</a></li>
-            <!--<li><a href="#">Sent Items</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Trash</a></li>-->
-        </ul>
-    </li>
-    <!--<li class="dropdown pull-right">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Settings</a></li>
-        </ul>
-    </li>-->
-    <li class="dropdown pull-right"><a>{greeting}</a></li>
-</ul></div>
+
+<script>
+var poemid = "<?php
+  echo $_GET['id'];
+?>";
 </script>
 
-  <!--<h1><img src="images/dekaaz.png" style="padding-top: 10px; height: auto; max-width: 400px;"/></h1>
-  <div id="main" style="background-color: #F5F5F5; margin-bottom: 20px;">-->
+  <div id="main" style="margin-bottom: 20px;">
+
+		<div id="input-wrapper">
+			<!-- Everything wrapped inside the "dekaaz-maker" div specifies the input boxes into which the user can enter their dekaaz. Once the "poem-submit" button is clicked, the Dekaaz is saved to the Parse Database. Refer to "Dekaaz Saved to Database" section in "feed.js" to see how this is done. 
+
+			As the user types words into the input fields, there will be real-time updates in the "syll_count" div, giving the user feedback on how many syllables he/she has used so far. Refer to: "Syllable Counting Using Wordnik" section in the "feed.js" file for the code for syllable counting.
+			-->
+			<div id="dekaaz-maker" style="width: 100%; height: 150px;">
+			
+				<div style="width: 50%; margin-left: 10px; float: left !important; display: inline;">
+					<input type="text" id="poem-input-1" class="lines">
+			
+					<input type="text" id="poem-input-2" class="lines">
+			
+					<input type="text" id="poem-input-3" class="lines">
+					<br/>
+				</div>
+			
+				<div style="width: 40%; float: right !important; display: inline; text-align: right;" id="syll_count">0 syllables
+				</div>
+		
+			</div>
+			<div>
+        <div class="croaker" croakcb="1"></div>
+        <br/>
+				<div id="audio"></div>
+				<br/>
+        <input style="text-align: left !important;" type="button" id="poem-submit" value="Add">
+        
+        <!-- end copy/paste -->
+      </div>
+      </div>
+        <script type="text/javascript" src="utils.js"></script>
+        <script type="text/javascript" src="home.js"></script>
+        <script type="text/javascript" src="poemedit.js"></script>
+      </body>
+</html>

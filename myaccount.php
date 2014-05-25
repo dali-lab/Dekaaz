@@ -5,6 +5,7 @@ var user_acc = "<?php
 ?>";
 // console.log("Name is " + name);
 </script>
+
 <div class="container">
   <div class="row">
     <aside class="span4">
@@ -104,6 +105,8 @@ YUI().use('node', function(Y) {
                   <span class="timestamp">
                     Posted at: {createdAt}
                   </span>
+                  <br/>
+                  <input style="text-align: left !important; height: 40px; " class="btnEdit" type="button" id="{id}" value="Edit" >
                 
               </li>
             </script>
@@ -151,9 +154,40 @@ YUI().use('node', function(Y) {
                       id: val.id,
                     });
                     $('.microposts').prepend(content);
-
+                    
 
                   });
+
+                  $(".btnEdit").on("click", function() {
+                      var poemid = $( this ).attr( "id" );
+                     $.colorbox({width:"85%", height:"85%", iframe:true, href:"updatedekaaz.php?id=" + poemid, 
+                        onClosed: function() {
+                            
+                            var Dekaaz = Parse.Object.extend("Dekaaz");
+                            var query = new Parse.Query(Dekaaz);
+                            query.get(poemid, {
+                              success: function(object) {
+                                
+                                $("#" + poemid + " .content").empty();
+                                $("#" + poemid + " .content").html(
+                                  object.get("line1") + "<br/>" +
+                                  object.get("line2") + "<br/>" +
+                                  object.get("line3") + "<br/>"
+                                );
+
+                              },
+
+                              error: function(object, error) {
+                                // error is an instance of Parse.Error.
+                              }
+                            });
+
+                            //do other stuff
+                        } 
+                     });
+                     
+                  });     
+
                   if(results.length == 0) {
                       $('.microposts').prepend('User has never made a Dekaaz');
                     }

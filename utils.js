@@ -28,7 +28,16 @@ function getRealUsername(user) {
 function attachUserLinks() {
 	$(".user").click(function() {
 		// setCookie("user_account", $(this).attr('id'), 1);
-		window.location.href = "account.php?user_account=" + $(this).attr('id');
+		// alert("myid: " + Parse.User.current().id);
+		// alert("userid: " + $(this).attr('id'));
+		var bool = Parse.User.current().id != $(this).attr('id');
+		// alert("same? " + bool);
+		if(Parse.User.current() == null || Parse.User.current().id.valueOf() != $(this).attr('id').valueOf()) {
+			window.location.href = "account.php?user_account=" + $(this).attr('id');
+		} else {
+			window.location.href = "myaccount.php";
+		}
+
 	});
 }
 

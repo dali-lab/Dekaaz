@@ -259,5 +259,78 @@
       </div>
         <script type="text/javascript" src="utils.js"></script>
         <script type="text/javascript" src="home.js"></script>
+        <script type="text/javascript">
+          /* 
+          Dekaaz Saved to Database:
+          Save a Dekaaz to the database, and update the Shared Dekaaz's to include this newly created Dekaaz 
+          */
+          submitBtn.on('click', function(e) {
+            
+          
+            //Save the current Dekaaz
+            var textLine1 = Y.one('#poem-input-1').get('value');
+            var textLine2 = Y.one('#poem-input-2').get('value');
+            var textLine3 = Y.one('#poem-input-3').get('value');
+            var Dekaaz = Parse.Object.extend("Dekaaz");
+            var dekaazPoem = new Dekaaz();
+            
+
+            dekaazPoem.set("line1", textLine1);
+            dekaazPoem.set("line2", textLine2);
+            dekaazPoem.set("line3", textLine3);
+            var decomposed_array = decompose(sylls.slice(1, sylls.length - 1));
+            if(decomposed_array == null) {
+              return;
+            }
+            // dekaazPoem.set("line1syll", decomposed_array[0]);
+            // dekaazPoem.set("line2syll", decomposed_array[1]);
+            // dekaazPoem.set("line3syll", decomposed_array[2]);
+            dekaazPoem.set("syllarray", decomposed_array);
+            dekaazPoem.set("Sound", soundFile);
+
+            if(Parse.User.current() != null) {
+              dekaazPoem.set("parent", Parse.User.current());
+            }
+            alert("Thank you for submitting a Dekaaz!");
+            //Once it is saved, show it in the list of dekaaz.
+            dekaazPoem.save(null, {
+              success: function(item) {
+
+                if(Parse.User.current() != null) {
+                  Parse.User.current().relation("Post").add(dekaazPoem);
+                  var curr_username = Parse.User.current().getUsername();
+                  Parse.User.current().save();
+                  Parse.User.current().setUsername(curr_username);
+                }
+                noTasksMessage.addClass('hidden');
+                var owner_name;
+                var curr_user_role = -1;
+                if(Parse.User.current() != null) {
+                  console.log(Parse.User.current().get("username"));
+                  owner_name = Parse.User.current().getUsername();
+                  alert("ID " + Parse.User.current().id);
+
+                  Parse.User.current().fetch({
+                    success: function(author) {
+                      curr_user_role = author.get('role');
+                      populate(item, owner_name, Parse.User.current().id, -1, curr_user_role);
+                    }
+                  });
+
+                } else {
+                  owner_name = "Unknown";
+                  populate(item, owner_name, null, -1, curr_user_role);
+                }
+
+                input1.set('value', '').focus();
+                input2.set('value', '').focus();
+                input3.set('value', '').focus();
+                
+              }
+            });
+
+
+          });
+      </script>
       </body>
 </html>
