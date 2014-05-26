@@ -227,27 +227,18 @@ YUI().use('node', function(Y) {
 
 		}
 		console.log("Role: " + role);
-		if(role == 0) {
-		  			// $(document).ready(function(){
- 				 	// $("#poem_delete").hide();
-  					// });
-		  			// document.write("-- <b>bold</b> <font color=red> red </font>--");
-		  			// $("#poem_delete")
-		  		} else if(role == 1) {
-		  			// Y.one('#poem_delete').hide;
-		  			$(document).ready(function(){
- 				 	$(".deleteBtn").hide();
-  					});
-		  		} 
-		  	//   },
-		  	//  error: function(error) {
-			  //   alert("Error when retrieving: " + error.code + " " + error.message);
-			  // }
-		  	// });
+		if(role == 0) {} 
+		else if(role == 1) {
+		  		$(document).ready(function(){
+		  			if(owner_param != Parse.User.current().getUsername()) {
+		  				var currId = val.id;
+		  				document.getElementById(currId).style.visibility="hidden";
+		  			} 			 	
+  				});
+		  	} 
 
 		  	// visitors
 			 else {
-				// Y.one('#poem_delete').hide;
 		  		$(document).ready(function(){
  				$(".deleteBtn").hide();
   				});
