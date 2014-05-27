@@ -12,7 +12,7 @@ $("#login-form").submit(function() {
   Parse.User.logIn(username, password, {
     success: function(user) {
       alert("logged in user!");
-      window.location.href = "index.html";
+      window.location.href = "index.php";
     },
 
     error: function(user, error) {

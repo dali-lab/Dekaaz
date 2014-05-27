@@ -11,7 +11,7 @@ $("#signup-form").submit(function() {
   Parse.User.signUp(username, password, null, {
     success: function(user) {
       alert("signed up user!");
-      window.location.href = "index.html";
+      window.location.href = "index.php";
     },
 
     error: function(user, error) {
