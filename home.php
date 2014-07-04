@@ -260,6 +260,64 @@
         <script type="text/javascript" src="utils.js"></script>
         <script type="text/javascript" src="home.js"></script>
         <script type="text/javascript">
+
+          function decompose(syll_arr) {
+
+            var structure = new Array();
+            structure[0] = 2;
+            structure[1] = 3;
+            structure[2] = 5;
+            var struct_index = 0;
+
+            var totalSyllCount = 0;
+            for (var p=0;p<syll_arr.length;p++)
+            {
+              totalSyllCount += syll_arr[p];
+              if(totalSyllCount == structure[struct_index]) {
+                struct_index++;
+                totalSyllCount = 0;
+              } else {
+                if(totalSyllCount > structure[struct_index]) {
+                  alert("Syll Count Wrong!");
+                  return null;
+                }
+              }
+            }
+
+            var current_index = 0;
+
+            var solution = new Array();
+            solution[0] = new Array();
+            solution[1] = new Array();
+            solution[2] = new Array();
+
+            var bool = new Array();
+
+            for (var i=0;i<syll_arr.length;i++)
+            { 
+              structure[current_index] -= syll_arr[i];
+              solution[current_index][solution[current_index].length] = syll_arr[i];
+              if(structure[current_index] == 0) {
+                for (var k=0;k<solution[current_index].length;k++)
+                {
+                  for(var l=0;l<solution[current_index][k] - 1;l++) {
+                    bool.push(true);
+                  }
+                  bool.push(false);
+                }
+                bool.pop();
+                current_index++;
+              }
+            }
+            console.log(bool);
+            return bool;
+          }
+
+          var submitBtn = $("#poem-submit");
+          var input1 = $("#poem-input-1"),
+          input2 = $("#poem-input-2"),
+          input3 = $("#poem-input-3");
+
           /* 
           Dekaaz Saved to Database:
           Save a Dekaaz to the database, and update the Shared Dekaaz's to include this newly created Dekaaz 
@@ -268,9 +326,12 @@
             
           
             //Save the current Dekaaz
-            var textLine1 = Y.one('#poem-input-1').get('value');
-            var textLine2 = Y.one('#poem-input-2').get('value');
-            var textLine3 = Y.one('#poem-input-3').get('value');
+            var textLine1 = $('#poem-input-1').val();
+            var textLine2 = $('#poem-input-2').val();
+            var textLine3 = $('#poem-input-3').val();
+
+            alert(textLine1 + " " + textLine2 + " " + textLine3);
+
             var Dekaaz = Parse.Object.extend("Dekaaz");
             var dekaazPoem = new Dekaaz();
             
@@ -302,29 +363,10 @@
                   Parse.User.current().save();
                   Parse.User.current().setUsername(curr_username);
                 }
-                noTasksMessage.addClass('hidden');
-                var owner_name;
-                var curr_user_role = -1;
-                if(Parse.User.current() != null) {
-                  console.log(Parse.User.current().get("username"));
-                  owner_name = Parse.User.current().getUsername();
-                  alert("ID " + Parse.User.current().id);
 
-                  Parse.User.current().fetch({
-                    success: function(author) {
-                      curr_user_role = author.get('role');
-                      populate(item, owner_name, Parse.User.current().id, -1, curr_user_role);
-                    }
-                  });
-
-                } else {
-                  owner_name = "Unknown";
-                  populate(item, owner_name, null, -1, curr_user_role);
-                }
-
-                input1.set('value', '').focus();
-                input2.set('value', '').focus();
-                input3.set('value', '').focus();
+                input1.val('');
+                input2.val('');
+                input3.val('');
                 
               }
             });

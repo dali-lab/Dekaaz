@@ -237,6 +237,5 @@ YUI().use('node', function(Y) {
       });
   // });
 
-  // YUI().use('node', function(Y) {
-  
+
 <?php include 'account/account_common_footer.php'; ?>

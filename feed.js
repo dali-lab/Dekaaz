@@ -10,7 +10,7 @@ function paginateDekaazs(num) {
  //        totalPages: Math.ceil(num/10)
  //    }
  	$('.pagination ul').empty();
-    var x = '<li><a href="javascript:goToPreviousPage()">←</a></li>';
+    var x = '<li><a href="javascript:goToPreviousPage()"><-</a></li>';
     $('.pagination ul').append(x);
  	// x = '<li class="active" id="' + 1 + '"><a href="javascript:goToPage(1)">1</a></li>';
  	// $('.pagination ul').append(x);
@@ -29,7 +29,7 @@ function paginateDekaazs(num) {
  		$('.pagination ul').append(x);
   	}
     // $('.pagination ul').append('<li class="disabled"><a href="#">...</a></li>');
-	$('.pagination ul').append('<li><a href="javascript:goToAfterPage(' + Math.floor(num/10) + ')">→</a></li>');
+	$('.pagination ul').append('<li><a href="javascript:goToAfterPage(' + Math.floor(num/10) + ')">-></a></li>');
     // $('#example').bootstrapPaginator(options);
     $('#incomplete-items li').slice(100).hide();
     $('#incomplete-items li').slice(0, 100).show();
@@ -512,117 +512,95 @@ YUI().use('node', function(Y) {
 
 	});
 	
-	
-	
+	function putDekaazFromDatabaseToWebpage(query, curr_user_role) {
+		query.find({
+		  	success: function(results) {
+				if (results.length > 0) {
+					noTasksMessage.addClass('hidden');
+				}
 
-	/* Dekaaz Listing: Retrieve the 10 most recent Dekaazs, and load the 
-	'#todo-items-template' which can be found in "index.html", passing in the Dekaaz's */
+				createLists(results.length);
+
+				Y.Array.each(results, function(val, i, arr) {
+						
+				  		var author = val.get('parent');
+				  		if(author != null) {
+								
+							var x = i + 1;
+					  		author.fetch({
+							  success: function(author) {
+							    var author_name = author.getUsername();
+							    console.log("i: " + x);
+							    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+							    populate(val, author_name, author.id, x, curr_user_role);
+							    if(numTimes == 11) {
+							    	console.log("Called");
+								}
+							    console.log(i);
+
+								attachUserLinks();
+								if(i == results.length - 1) {
+									paginateDekaazs(results.length);
+								}
+							  }
+							});
+						} else {
+							console.log(i);
+								console.log("i: " + x);
+							    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+							
+							var x = i + 1;
+							console.log("i: " + x);
+							console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
+							populate(val, "Unknown", null, x, curr_user_role);
+							if(numTimes == 11) {
+								console.log("Called");
+							}
+							
+							attachUserLinks();
+							if(i == results.length - 1) {
+								paginateDekaazs(results.length);
+							}
+						}
+
+				});
+				
+		  	},
+		  	error: function(error) {
+		  		alert("Error when retrieving Todos: " + error.code + " " + error.message);
+		  	}
+		});
+	}
+
 	Dekaaz = Parse.Object.extend("Dekaaz");
 	query = new Parse.Query(Dekaaz);
-	// query.limit(10);
 	query.descending('createdAt');
-	var in_use = false;
-	var counter_dekaaz = 0;
-	console.log("ready");
+
 	var curr_user_role = -1;
+	/*
+		curr_user_role is 0 if admin
+		curr_user_role is undefined if non-admin
+		curr_user_role is -1 if not logged in		
+	*/
 	var curr_user_var = Parse.User.current();
+
 	if(curr_user_var != null) {
 		curr_user_var.fetch({
 			success: function(author) {
+
 				curr_user_role = author.get('role');
-
-
-
-				query.find({
-				  success: function(results) {
-						if (results.length > 0) {
-							noTasksMessage.addClass('hidden');
-						}
-
-						createLists(results.length);
-
-						//Append each of the incomplete tasks to the Incomplete List
-						Y.Array.each(results, function(val, i, arr) {
-								// console.log("YO");
-								
-								// while(counter_dekaaz != i) {
-								// 	var qq = 0;
-								// }
-								console.log("numtimes: " + numTimes);
-						  		var author = val.get('parent');
-						  		if(author != null) {
-						  	// 		while(in_use == true) {
-										
-									// }
-									var x = i + 1;
-									// in_use = true;
-									
-							  		author.fetch({
-									  success: function(author) {
-									    var author_name = author.getUsername();
-									    console.log("i: " + x);
-									    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
-									    populate(val, author_name, author.id, x, curr_user_role);
-									    if(numTimes == 11) {
-									    	console.log("Called");
-											// Processing.reload();
-										}
-										// numTimes++;
-									    //Processing.reload();
-									    console.log(i);
-
-										attachUserLinks();
-										if(i == results.length - 1) {
-											paginateDekaazs(results.length);
-										}
-
-										// in_use = false;
-										// console.log(counter_dekaaz);
-										counter_dekaaz++;
-									  }
-									});
-								} else {
-									console.log(i);
-									// while(in_use == true) {
-										console.log("i: " + x);
-									    console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
-									// }
-
-									// in_use = true;
-									var x = i + 1;
-									console.log("i: " + x);
-									console.log("POEM: " + val.get("line1") + " " + val.get("line2") + " " + val.get("line3"));
-									populate(val, "Unknown", null, x, curr_user_role);
-									if(numTimes == 11) {
-										console.log("Called");
-									// Processing.reload();
-									}
-									
-									attachUserLinks();
-									if(i == results.length - 1) {
-										paginateDekaazs(results.length);
-									}
-									counter_dekaaz++;
-									// in_use = false;
-								}
-
-						});
-						
-				  },
-				  error: function(error) {
-				    alert("Error when retrieving Todos: " + error.code + " " + error.message);
-				  }
-				});
-
-
+				putDekaazFromDatabaseToWebpage(query, curr_user_role);
 
 			}
 		});
-	} 
+	} else {
+		putDekaazFromDatabaseToWebpage(query, curr_user_role);
+	}
 	console.log("FIrst role: " + curr_user_role);
 
-	//Processing.reload();
 });
+
+
 
 /* 
 Helper method for counting syllables in the parameter, word.
