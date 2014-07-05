@@ -24,10 +24,9 @@
 			<div>
         <div class="croaker" croakcb="1"></div>
         <br/>
+        <div id="audio_div"></div>
 				<input style="text-align: left !important;" type="button" id="poem-submit" value="Add">
 				<br/>
-
-        <div id="audio"></div>
 				<h2>Shared Dekaaz:</h2>
 
 
@@ -85,7 +84,8 @@
         <!--delete button for admin-->
         <br/>
         <input style="text-align: left !important; height: 40px; " type="button" class="deleteBtn" id="{id}" value="Delete" onClick="deletePoem('{id}')"/>
-        <br> 
+        <br>
+         
         </div>
         <div style="display: inline-block; width: 47%; vertical-align: top; float: right;">
         <canvas id="mysketch-{id}" data-processing-sources="form.pde" style="max-height: 100px; max-width 100px; float: right;" file="{file}"></canvas>

@@ -256,6 +256,7 @@ YUI().use('node', function(Y) {
   				});
 			}
 
+
 		console.log("canvasId: " + "mysketch-" + val.id);
 		var canvas = document.getElementById("mysketch-" + val.id);
 		var context = canvas.getContext('2d');
@@ -278,6 +279,7 @@ YUI().use('node', function(Y) {
 		numTimes++;
 		
 	}
+
 
 	/* Search Dekaazs */
 	$(".dekaaz_search").submit(function() {

@@ -205,14 +205,22 @@ ul { padding: 0; }
         $("#FacebookLink").click(function() {
           alert("in doIt function");
 
-          Parse.FacebookUtils.link(Parse.User.current(), null, {
-             success: function(currentUser) {
+          if(Parse.FacebookUtils.isLinked(Parse.User.current()) {
+            Parse.FacebookUtils.link(Parse.User.current(), null, {
+              success: function(currentUser) {
                alert("Woohoo, user logged in with Facebook!");
-             },
-             error: function(currentUser, error) {
+              },
+              error: function(currentUser, error) {
                alert("User cancelled the Facebook login or did not fully authorize.");
-             }
-          });
+              }
+            });
+          } else {
+            Parse.FacebookUtils.unlink(Parse.User.current(), {
+              success: function(user) {
+                alert("The user is no longer associated with their Facebook account.");
+              }
+            });
+          }
         });
 
           

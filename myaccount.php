@@ -1,4 +1,7 @@
 <?php include 'header.php'; ?>
+
+<script type="text/javascript" src="utils.js"></script>
+
 <script>
 var user_acc = "<?php
   echo $_GET['user_account'];
@@ -120,21 +123,6 @@ YUI().use('node', function(Y) {
                   <input style="text-align: left !important; height: 40px; " class="btnEdit" type="button" id="{id}" value="Edit" >
             </script>
             
-<script>
-    function getCookie()
-    {
-      // var name = cname + "=";
-      // var ca = document.cookie.split(';');
-      // for(var i=0; i<ca.length; i++) 
-      //   {
-      //   var c = ca[i].trim();
-      //   if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-      //   }
-      // return "";
-      return user_acc;
-    }
-    
-  </script>
 
 <script>
 
@@ -167,41 +155,7 @@ YUI().use('node', function(Y) {
 
                   });
 
-                  $(".btnEdit").on("click", function() {
-                      var poemid = $( this ).attr( "id" );
-                     $.colorbox({width:"85%", height:"85%", iframe:true, href:"updatedekaaz.php?id=" + poemid, 
-                        onClosed: function() {
-                            
-                            var Dekaaz = Parse.Object.extend("Dekaaz");
-                            var query = new Parse.Query(Dekaaz);
-                            query.get(poemid, {
-                              success: function(object) {
-                                
-
-
-                                var content = Y.Lang.sub(Y.one('#update-template').getHTML(), {
-                                  line1: object.get('line1'),
-                                  line2: object.get('line2'),
-                                  line3: object.get('line3'),
-                                  createdAt: object.createdAt,
-                                  id: object.id,
-                                });
-
-                                $("#" + poemid).empty();
-                                $("#" + poemid ).html(content);
-
-                              },
-
-                              error: function(object, error) {
-                                // error is an instance of Parse.Error.
-                              }
-                            });
-
-                            //do other stuff
-                        } 
-                     });
-                     
-                  });     
+                  doBtnEdit(Y);  
 
                   if(results.length == 0) {
                       $('.microposts').prepend('User has never made a Dekaaz');

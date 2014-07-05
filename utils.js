@@ -7,11 +7,51 @@ var soundFile;
     if(callbackCode==1){
            var str = '<audio src="' + croakmp3source + '" controls="controls"></audio>';
            soundFile = croakmp3source;
-		   $('#audio').html(str);
+		   $('#audio_div').html(str);
            
 
     }
  }
+
+function doBtnEdit(Y) {
+
+	$(".btnEdit").on("click", function() {
+		alert("Called");
+                      var poemid = $( this ).attr( "id" );
+                     $.colorbox({width:"85%", height:"85%", iframe:true, href:"updatedekaaz.php?id=" + poemid, 
+                        onClosed: function() {
+                            
+                            var Dekaaz = Parse.Object.extend("Dekaaz");
+                            var query = new Parse.Query(Dekaaz);
+                            query.get(poemid, {
+                              success: function(object) {
+                                
+
+
+                                var content = Y.Lang.sub(Y.one('#update-template').getHTML(), {
+                                  line1: object.get('line1'),
+                                  line2: object.get('line2'),
+                                  line3: object.get('line3'),
+                                  createdAt: object.createdAt,
+                                  id: object.id,
+                                });
+
+                                $("#" + poemid).empty();
+                                $("#" + poemid ).html(content);
+
+                              },
+
+                              error: function(object, error) {
+                                // error is an instance of Parse.Error.
+                              }
+                            });
+
+                            //do other stuff
+                        } 
+                     });
+                     
+                  });   
+}
 
 function logoutFunc() {
 	$("#logout-button").attr("disabled", "disabled");

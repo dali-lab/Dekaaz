@@ -25,7 +25,7 @@ Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8j
   <!--<%= pluralize(current_user.microposts.count, "micropost") %>-->
 </span>
 <br/>
-<input type="button" id="FacebookLink" value="Link To Facebook Account"/>
+<input type="button" id="FacebookLink" />
 <br/>
 
 
@@ -37,6 +37,12 @@ Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8j
 	<script type="text/javascript" src="account/account.js">
 	</script>
 <script>
+
+	if(Parse.FacebookUtils.isLinked(Parse.User.current())) {
+		$("#FacebookLink").attr("value", "Unlink from Facebook");
+	} else {
+		$("#FacebookLink").attr("value", "Link To Facebook Account");
+	}
 /*
 function linkToFacebook() {
 

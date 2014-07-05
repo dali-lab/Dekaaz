@@ -250,7 +250,7 @@
 			<div>
         <div class="croaker" croakcb="1"></div>
         <br/>
-				<div id="audio"></div>
+				<div id="audio_div"></div>
 				<br/>
         <input style="text-align: left !important;" type="button" id="poem-submit" value="Add">
         
