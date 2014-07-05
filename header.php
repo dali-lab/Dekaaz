@@ -193,14 +193,31 @@ ul { padding: 0; }
     <script>
     Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8jzS98f3yVLTtza17J2zqGBx");
 
-      window.fbAsyncInit = function() {
-        Parse.FacebookUtils.init({
-        appId      : '520144374763187', // Facebook App ID
-        channelUrl : 'http://localhost:8888/dekaaz', // Channel File
-        status     : true, // check login status
-        cookie     : true, // enable cookies to allow Parse to access the session
-        xfbml      : true  // parse XFBML
-    });
+        window.fbAsyncInit = function() {
+          Parse.FacebookUtils.init({
+          appId      : '520144374763187', // Facebook App ID
+          channelUrl : 'http://localhost:8888/dekaaz', // Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow Parse to access the session
+          xfbml      : true  // parse XFBML
+        });
+
+        $("#FacebookLink").click(function() {
+          alert("in doIt function");
+
+          Parse.FacebookUtils.link(Parse.User.current(), null, {
+             success: function(currentUser) {
+               alert("Woohoo, user logged in with Facebook!");
+             },
+             error: function(currentUser, error) {
+               alert("User cancelled the Facebook login or did not fully authorize.");
+             }
+          });
+        });
+
+          
+        
+
       };
 
         FB.init({
