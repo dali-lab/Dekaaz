@@ -140,14 +140,14 @@ YUI().use('node', function(Y) {
 
 YUI().use('node', function(Y) {
           $('.microposts').empty();
-          var q = new Parse.Query("User");
-          var curr_user = Parse.User.current();
-              var account_info = Y.one('#current_user_info');
-              var left_side_content = Y.Lang.sub(Y.one('#user-info').getHTML(), {
-                name: curr_user.getUsername()
-              });
+          // var q = new Parse.Query("User");
+          // var curr_user = Parse.User.current();
+          //     var account_info = Y.one('#current_user_info');
+          //     var left_side_content = Y.Lang.sub(Y.one('#user-info').getHTML(), {
+          //       name: curr_user.getUsername()
+          //     });
 
-              account_info.prepend(left_side_content);
+          //     account_info.prepend(left_side_content);
               var q_posts = curr_user.relation("Post").query();
               q_posts.find({
                 success: function(results) {

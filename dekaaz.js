@@ -150,6 +150,7 @@ YUI().use('node', function(Y) {
 			});
 
 			accountInfo.prepend(content);
+			
 		} else {
 			name = "No Account";
 			mess = "Log In";
@@ -160,6 +161,7 @@ YUI().use('node', function(Y) {
 			});
 
 			accountInfo.prepend(content);
+			$("#top-bar li:nth-last-child(2)").hide();
 		}
 
 	});

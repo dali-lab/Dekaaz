@@ -171,6 +171,8 @@ YUI().use('node', function(Y) {
 			});
 
 			accountInfo.prepend(content);
+			
+			$("#top-bar li:nth-last-child(2)").hide();
 		}
 
 	});

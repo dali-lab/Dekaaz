@@ -2,13 +2,22 @@
 <script type="text/javascript">
 
 Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8jzS98f3yVLTtza17J2zqGBx");
+
+
+          var curr_user = Parse.User.current();
+          var name = curr_user.getUsername();
+          $("#name").append(name);
+
+
 </script>
 
-<script id="user-info" type="x/handlebars">
+
+
+
 <span>
 <a href="/users/1"><img alt="Example User" class="gravatar" src="https://secure.gravatar.com/avatar/bebfcf57d6d8277d806a9ef3385c078d?s=52"></a>
-<h1>
-  {name}
+<h1 id="name">
+  
 </h1>
 </span>
 <span>
@@ -18,7 +27,12 @@ Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8j
 <br/>
 <input type="button" id="FacebookLink" value="Link To Facebook Account"/>
 <br/>
-</script>
+
+
+
+
+
+
 	<!-- The feed that contains all the parse JS stuff, keys, etc-->
 	<script type="text/javascript" src="account/account.js">
 	</script>

@@ -42,19 +42,28 @@ YUI().use('node', function(Y) {
 			/* initialize content to hold the HTML under '#account-info' script tag in index.html */
 			mess = "Log Out";
 			/* initialize content to hold the HTML under '#account-info' script tag in index.html */
-			
+			var content = Y.Lang.sub(Y.one('#account-info').getHTML(), {
+				greeting: name,
+				message: mess
+			});
+
+			accountInfo.prepend(content);
 		} else {
 			name = "No Account";
 			mess = "Log In";
 			/* initialize content to hold the HTML under '#account-info' script tag in index.html */
+
+			var content = Y.Lang.sub(Y.one('#account-info').getHTML(), {
+				greeting: name,
+				message: mess
+			});
+
+			accountInfo.prepend(content);
+			$("#top-bar li:nth-last-child(2)").hide();
 		}
 
-		var content = Y.Lang.sub(Y.one('#account-info').getHTML(), {
-			greeting: name,
-			message: mess
-		});
+		
 
-		accountInfo.prepend(content);
 
 	// });
 
