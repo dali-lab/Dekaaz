@@ -68,7 +68,6 @@ function getRealUsername(user) {
 //for each Dekaaz poem, there is an author link, which redirects to the author's profile page
 function attachUserLinks() {
 	$(".user").click(function() {
-		var bool = Parse.User.current().id != $(this).attr('id');
 		if(Parse.User.current() == null || Parse.User.current().id.valueOf() != $(this).attr('id').valueOf()) {
 			window.location.href = "account.php?user_account=" + $(this).attr('id');
 		} else {

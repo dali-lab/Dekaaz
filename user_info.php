@@ -49,18 +49,22 @@ $("#name").append(name);
 # microposts
 </span>
 <br/>
+
+
+
+<?php if($user == "me") { ?>
+
 <input type="button" id="FacebookLink" />
 <br/>
+	<script>
 
-
+		if(Parse.FacebookUtils.isLinked(Parse.User.current())) {
+			$("#FacebookLink").attr("value", "Unlink from Facebook");
+		} else {
+			$("#FacebookLink").attr("value", "Link To Facebook Account");
+		}
+	</script>
+<?php } ?>
 	<!-- The feed that contains all the parse JS stuff, keys, etc-->
 	<script type="text/javascript" src="account/account.js">
 	</script>
-<script>
-
-	if(Parse.FacebookUtils.isLinked(Parse.User.current())) {
-		$("#FacebookLink").attr("value", "Unlink from Facebook");
-	} else {
-		$("#FacebookLink").attr("value", "Link To Facebook Account");
-	}
-</script>

@@ -170,4 +170,7 @@ mQuery.get(dekaaz_id, {
 
 });
 </script>
+
+<script type="text/javascript" src="utils.js">
+</script>
 <?php include_once("footer.php"); ?>
