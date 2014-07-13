@@ -234,7 +234,7 @@ YUI().use('node', function(Y) {
 			});
 		  },
 		  error: function(error) {
-		  	alert(error.message);
+		  	
 		  }
 		});
 

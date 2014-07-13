@@ -44,12 +44,13 @@ var user_acc = "<?php
                       Parse.User.current().save();
 
                       Parse.User.current().setUsername(curr_username);
-YUI().use('node', function(Y) {
-                      var follow_html = Y.Lang.sub(Y.one('#following_button').getHTML());
 
-                      $('#follow_form').html(follow_html);
-                      attachFollowButtonEvent();
-                    });
+                      YUI().use('node', function(Y) {
+                        var follow_html = Y.Lang.sub(Y.one('#following_button').getHTML());
+
+                        $('#follow_form').html(follow_html);
+                        attachFollowButtonEvent();
+                      });
 
                     }
                   });
@@ -73,12 +74,12 @@ YUI().use('node', function(Y) {
                       Parse.User.current().save();
 
                       Parse.User.current().setUsername(curr_username);
-YUI().use('node', function(Y) {
-                      var unfollow_html = Y.Lang.sub(Y.one('#unfollowing_button').getHTML());
+                      YUI().use('node', function(Y) {
+                        var unfollow_html = Y.Lang.sub(Y.one('#unfollowing_button').getHTML());
 
-                      $('#follow_form').html(unfollow_html);
-                      attachUnfollowButtonEvent();
-                    });
+                        $('#follow_form').html(unfollow_html);
+                        attachUnfollowButtonEvent();
+                      });
                     }
                   });
 
@@ -91,31 +92,31 @@ YUI().use('node', function(Y) {
 
       </div>
       <h3>My Dekaaz</h3>
-        <ol class="microposts" style="padding: 0px !important;">
+      <ol class="microposts" style="padding: 0px !important;">
 
-        </ol>
+      </ol>
     </div>
   </div>
   </div>
 
-            <script id="todo-items-template" type="x/handlebars">
-              <li id="{id}">
-                  <span class="content">{line1}<br/>{line2}<br/>{line3}<br/></span>
-                  <span class="timestamp">
-                    Posted at: {createdAt}
-                  </span>
-                
-              </li>
-            </script>
+    <script id="todo-items-template" type="x/handlebars">
+      <li id="{id}">
+          <span class="content">{line1}<br/>{line2}<br/>{line3}<br/></span>
+          <span class="timestamp">
+            Posted at: {createdAt}
+          </span>
+        
+      </li>
+    </script>
 
-<script>
-    function getCookie()
-    {
-      return user_acc;
-    }
-    
-  </script>
-<script>
+    <script>
+      function getCookie()
+      {
+        return user_acc;
+      }
+      
+    </script>
+    <script>
 
         YUI().use('node', function(Y) {
 
