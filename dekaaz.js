@@ -1,49 +1,23 @@
 
 var currentDekaaz = 0;
 
+//shows one Dekaaz on the webpage, and hides the rest
+//clicking the left and right arrows allows user to view other Dekaaz
 function individualizeDekaazs(num) {
-	// num = 100;
- //    var options = {
- //        currentPage: 3,
- //        totalPages: Math.ceil(num/10)
- //    }
- // 	$('.pagination ul').empty();
- //    var x = '<li><a href="javascript:goToPreviousPage()">←</a></li>';
- //    $('.pagination ul').append(x);
- // 	// x = '<li class="active" id="' + 1 + '"><a href="javascript:goToPage(1)">1</a></li>';
- // 	// $('.pagination ul').append(x);
- // 	// if(Math.floor(num/10) == 0) {
- // 	// 	x = '<li class="active" id="1"><a href="javascript:goToPage(' + 1 + ')">' + 1 + '</a></li>';
- //  // 		$('.pagination ul').append(x);
- // 	// }
- // 	for (var i=1; i<=Math.ceil(num/10); i++)
- //  	{
- //  		if(i == 1) {
- //  			x = '<li class="active" id="' + i + '"><a href="javascript:goToPage(' + i + ')">' + i + '</a></li>';
- //  			$('.pagination ul').append(x);
- //  			continue;
- //  		}
- //  		x = '<li id="' + i + '"><a href="javascript:goToPage(' + i + ')">' + i + '</a></li>';
- // 		$('.pagination ul').append(x);
- //  	}
- //    // $('.pagination ul').append('<li class="disabled"><a href="#">...</a></li>');
-	// $('.pagination ul').append('<li><a href="javascript:goToAfterPage(' + Math.floor(num/10) + ')">→</a></li>');
-    // $('#example').bootstrapPaginator(options);
-    console.log("current dekaaz: " + currentDekaaz);
+
     $('#incomplete-items li').slice(currentDekaaz+1).hide();
     $('#incomplete-items li:eq(' + currentDekaaz + ')').show();
     $(window).keydown(function(e){
+    	//when the right arrow key is clicked, show the next Dekaaz
 	    if(e.which === 39){
-	    	// alert("DETECTED");
 	        if(currentDekaaz<num-1){
 	            $('#incomplete-items li:eq(' + currentDekaaz + ')').hide();
-	            // alert($('#incomplete-items li:eq(' + currentDekaaz + ')').html());
 	            currentDekaaz = currentDekaaz+1;
 	            $('#incomplete-items li:eq(' + currentDekaaz + ')').show();
 	        }
 	    }
+	    //when the left arrow key is clicked, show the previous Dekaaz
 	    else if(e.which === 37){
-	    	// alert("DETECTED2");
     		if(currentDekaaz>0){
 	            $('#incomplete-items li:eq(' + currentDekaaz + ')').hide();
 	            currentDekaaz = currentDekaaz-1;
@@ -52,51 +26,7 @@ function individualizeDekaazs(num) {
 	    }
 	});
     
-
-    // attachPaginationEvents(Math.ceil(num/10));
 }
-
-// function goToPage(num) {
-// 	$('#incomplete-items li').slice(0, num*10-10).hide();
-// 	$('#incomplete-items li').slice(num*10-10, num*10).show();
-// 	$('#incomplete-items li').slice(num*10).hide();
-// 	$('.active').removeClass('active');
-// 	$('#' + num).addClass('active');
-	
-// }
-
-// function goToPreviousPage() {
-// 	var num = $('.active').attr('id');
-// 	if(num-1 >= 1) {
-// 		goToPage(num-1);
-// 	}
-// }
-
-// function goToAfterPage(maxnum) {
-// 	// alert(maxnum);
-// 	var num = parseInt($('.active:last').attr('id'));
-// 	// alert(maxnum);
-// 	// alert(num);
-// 	// alert(num+1 <= maxnum);
-// 	// alert(num+1);
-// 	// alert(maxnum);
-// 	if(num+1 <= maxnum) {
-// 		// alert(maxnum);
-// 		// alert(num+1);
-// 		goToPage(num+1);
-// 	}
-// }
-
-// function attachPaginationEvents(num) {
-//  	for (var i=1; i<=Math.floor(num/10); i++)
-//   	{
-//   		$('#' + i).click(function() {
-//   			return false;
-//   		});
-//   	}
-// }
-
-
 
 YUI().use('node', function(Y) {
 	
@@ -111,26 +41,25 @@ YUI().use('node', function(Y) {
 	input2 = Y.one("#poem-input-2"),
 	input3 = Y.one("#poem-input-3");
 
-	/* Top Navigation Bar: when the page is ready, get the current user's username, and pass the username to the 
-	script tag identified by '#account-info', which will generate HTML code. This HTML code is saved in the content
-	variable, which is prepended to the body */
+	/* 
+	The following code applies to the top navigation bar 
+	(Refer to the #account-info element in header.php for the HTML) 
+	*/
 	$(document).ready(function() {
 
+		//if the user is not logged in, redirect to signup.html
 		var currentUser = Parse.User.current();
-		
 		var name;
-		// alert(currentUser);
+		
+		//if the user is logged into his Dekaaz account
 		if (currentUser) {
 			var username;
-			// alert("first");
-			// alert(Parse.FacebookUtils.isLinked(currentUser));
-			if(Parse.FacebookUtils.isLinked(currentUser)) {
-			// alert(currentUser.get("authData"));
-			// alert(currentUser.get("authData").facebook);
 			
-			// if(currentUser.get("authData") !== undefined 
-			// 	&& currentUser.get("authData").facebook !== undefined) {
-				// alert("1");
+			//if the user is logged into his Dekaaz account,
+			//but has logged out of the associated Facebook account,
+			//redirect the user to signup.html
+			if(Parse.FacebookUtils.isLinked(currentUser)) {
+			
 				FB.getLoginStatus(function(response) {
 				  if (response.status != 'connected') {
 				  	Parse.User.logOut();
@@ -141,9 +70,9 @@ YUI().use('node', function(Y) {
 			username = currentUser.getUsername();
 
 			name = "Welcome, " + username + "!";
-			/* initialize content to hold the HTML under '#account-info' script tag in index.html */
+			/* initialize content to hold the HTML under '#account-info' script tag in header.php */
 			mess = "Log Out";
-			/* initialize content to hold the HTML under '#account-info' script tag in index.html */
+			/* initialize content to hold the HTML under '#account-info' script tag in header.php */
 			var content = Y.Lang.sub(Y.one('#account-info').getHTML(), {
 				greeting: name,
 				message: mess
@@ -151,7 +80,9 @@ YUI().use('node', function(Y) {
 
 			accountInfo.prepend(content);
 			
-		} else {
+		} 
+		//if the user is not logged into his Dekaaz account
+		else {
 			name = "No Account";
 			mess = "Log In";
 			/* initialize content to hold the HTML under '#account-info' script tag in index.html */
@@ -166,6 +97,7 @@ YUI().use('node', function(Y) {
 
 	});
 
+	//populates the page with Dekaaz poems
 	function populate(val, owner_param, owner_id_param, role) {
 
 		var syllarray = val.get("syllarray");
@@ -315,7 +247,7 @@ YUI().use('node', function(Y) {
 	
 
 	/* Dekaaz Listing: Retrieve the 10 most recent Dekaazs, and load the 
-	'#todo-items-template' which can be found in "index.html", passing in the Dekaaz's */
+	'#todo-items-template', passing in the Dekaaz's */
 	Dekaaz = Parse.Object.extend("Dekaaz");
 	query = new Parse.Query(Dekaaz);
 	// query.limit(10);

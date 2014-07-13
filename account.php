@@ -3,13 +3,13 @@
 var user_acc = "<?php
   echo $_GET['user_account'];
 ?>";
-// console.log("Name is " + name);
 </script>
 <div class="container">
   <div class="row">
     <aside class="span4">
       <section id="current_user_info">
-        <?php include_once("user_info.html"); ?>
+        <?php $user = "other"; ?>
+        <?php include_once("user_info.php"); ?>
       </section>
       
     </aside>
@@ -111,14 +111,6 @@ YUI().use('node', function(Y) {
 <script>
     function getCookie()
     {
-      // var name = cname + "=";
-      // var ca = document.cookie.split(';');
-      // for(var i=0; i<ca.length; i++) 
-      //   {
-      //   var c = ca[i].trim();
-      //   if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-      //   }
-      // return "";
       return user_acc;
     }
     
@@ -126,16 +118,12 @@ YUI().use('node', function(Y) {
 <script>
 
         YUI().use('node', function(Y) {
+
           $('.microposts').empty();
           var q = new Parse.Query("User");
           q.get(getCookie(), {
             success: function(curr_user) {
-              var account_info = Y.one('#current_user_info');
-              var left_side_content = Y.Lang.sub(Y.one('#user-info').getHTML(), {
-                name: curr_user.getUsername()
-              });
-
-              account_info.prepend(left_side_content);
+              
               var q_posts = curr_user.relation("Post").query();
               q_posts.find({
                 success: function(results) {
@@ -157,21 +145,15 @@ YUI().use('node', function(Y) {
                     if(results.length == 0) {
                       $('.microposts').prepend('User has never made a Dekaaz');
                     }
-                  // results is an array of Parse.Object.
                 },
 
                 error: function(error) {
-                  // error is an instance of Parse.Error.
                 }
               });
-              // The object was retrieved successfully.
             },
             error: function(object, error) {
-              // The object was not retrieved successfully.
-              // error is a Parse.Error with an error code and description.
             }
           });
-// });
 
   
       var q = new Parse.Query("User");
@@ -181,12 +163,6 @@ YUI().use('node', function(Y) {
             window.location.href = "signup.html";
           } else {
 
-          // var curr_username = Parse.User.current().getUsername();
-          //   Parse.User.current().relation("Followed").add(curr_user);
-
-
-          // Parse.User.current().save();
-          // Parse.User.current().setUsername(curr_username);
 
             var q_following = Parse.User.current().relation("Followed").query();
             q_following.include('objectId');

@@ -1,4 +1,6 @@
   <script type="text/javascript" src="parse.js"></script>
+
+<?php if($user == "me") { ?>
 <script type="text/javascript">
 
 Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8jzS98f3yVLTtza17J2zqGBx");
@@ -10,7 +12,30 @@ Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8j
 
 
 </script>
+<?php } else { ?>
+<script type="text/javascript">
 
+var curr_user;
+var name;
+
+Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8jzS98f3yVLTtza17J2zqGBx");
+
+YUI().use('node', function(Y) {
+          
+          var q = new Parse.Query("User");
+          q.get(getCookie(), {
+            success: function(dekaaz_user) {
+              
+              curr_user = dekaaz_user;
+              name = dekaaz_user.getUsername();
+$("#name").append(name);
+            },
+            error: function(object, error) {
+            }
+          });
+});
+</script>
+<?php } ?>
 
 
 

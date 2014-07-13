@@ -8,11 +8,11 @@ var soundFile;
            var str = '<audio src="' + croakmp3source + '" controls="controls"></audio>';
            soundFile = croakmp3source;
 		   $('#audio_div').html(str);
-           
-
     }
  }
 
+//creates a popup when the edit button on the homepage is clicked,
+//allowing the user to edit his Dekaaz
 function doBtnEdit(Y) {
 
 	$(".btnEdit").on("click", function() {
@@ -65,13 +65,10 @@ function getRealUsername(user) {
 	return user.getUsername();
 }
 
+//for each Dekaaz poem, there is an author link, which redirects to the author's profile page
 function attachUserLinks() {
 	$(".user").click(function() {
-		// setCookie("user_account", $(this).attr('id'), 1);
-		// alert("myid: " + Parse.User.current().id);
-		// alert("userid: " + $(this).attr('id'));
 		var bool = Parse.User.current().id != $(this).attr('id');
-		// alert("same? " + bool);
 		if(Parse.User.current() == null || Parse.User.current().id.valueOf() != $(this).attr('id').valueOf()) {
 			window.location.href = "account.php?user_account=" + $(this).attr('id');
 		} else {
@@ -109,14 +106,16 @@ function deletePoem(id) {
 	query.get(id, {
 		success: function(DekaazRow) {
 			// The object was retrieved successfully.
-			DekaazRow.destroy({});
-			document.location.reload();
+			DekaazRow.destroy({
+				success:function(ob) { document.location.reload(); }, 
+				error:function(ob, err) { alert("You may not delete this Dekaaz"); }
+			});
+			
 		},
 		error: function(object, error) {
-
+			alert("You may not delete this Dekaaz");
 		}
 	});
 
 	return false;
-	// var object = query.find(id);
 }
