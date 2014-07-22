@@ -1,6 +1,5 @@
-<?php include_once("header.php"); ?>
-<h1><img src="images/dekaaz.png" style="padding-top: 10px; height: auto; max-width: 400px;"/></h1>
-  <div id="main" style="background-color: #F5F5F5; margin-bottom: 20px;">
+<?php include_once("new_header.php"); ?>
+  <div id="main" style="margin-bottom: 20px;">
 		<div id="input-wrapper">
 			<!-- Everything wrapped inside the "dekaaz-maker" div specifies the input boxes into which the user can enter their dekaaz. Once the "poem-submit" button is clicked, the Dekaaz is saved to the Parse Database. Refer to "Dekaaz Saved to Database" section in "feed.js" to see how this is done. 
 
@@ -176,11 +175,6 @@
 
   </script>
 
-  <script>
-
-
-
-  </script>
 	
 </body>
 
