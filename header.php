@@ -205,7 +205,7 @@ ul { padding: 0; }
         $("#FacebookLink").click(function() {
           alert("in doIt function");
 
-          if(Parse.FacebookUtils.isLinked(Parse.User.current()) {
+          if(!Parse.FacebookUtils.isLinked(Parse.User.current())) {
             Parse.FacebookUtils.link(Parse.User.current(), null, {
               success: function(currentUser) {
                alert("Woohoo, user logged in with Facebook!");

@@ -106,61 +106,7 @@
 
   <script type="text/javascript">
     Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8jzS98f3yVLTtza17J2zqGBx");
-    var xx = 0;
-    var syllable_map = {};
-    syllable_map["test"] = "test";
-    var ids = new Array();
-    var allpoems = new Array();
-
-      Dekaaz = Parse.Object.extend("Dekaaz");
-      query = new Parse.Query(Dekaaz);
-      
-      // query.include("syllarray");
-      query.descending('createdAt');
-
-
-      query.find({
-          success: function(results) {
-            $.each(results, function( index, value ) {
-              ids.push(value.id); 
-              syllable_map[value.id] = value.get("syllarray");
-              allpoems.push(value.get("line1") + " " + value.get("line2") + " " + value.get("line3"));
-            });
-            syllable_map["test"] = "nottest";
-            // console.log(syllable_map);
-            // console.log(ids);
-            return syllable_map;
-
-          },
-          error: function(error) {
-            alert("Error when retrieving: " + error.code + " " + error.message);
-          }
-      });
-
-    function getSyllableArray() {
-      var y = 5;
-      
-      while(syllable_map["test"] == "test") {
-
-        // console.log("SDF");
-        y++;
-      }
-      
-      console.log(syllable_map);
-
-      var ret = syllable_map[ids[xx]];
-      console.log("SSS");
-      console.log(allpoems[xx]);
-      console.log(xx);
-      // console.log(ids);
-      console.log(ids[xx]);
-      console.log(ret);
-
-      xx++;
-      return ret;
-    }
-
-
+    
     
   </script>
 	<!-- The feed that contains all the parse JS stuff, keys, etc-->

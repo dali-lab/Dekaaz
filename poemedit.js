@@ -1,3 +1,6 @@
+//when the user clicks the "Edit" button for a Dekaaz, a popup will appear, 
+//showing the current Dekaaz.
+//the variable, poemid, is the ID of the poem that the user selected to edit.
 var mDekaaz = Parse.Object.extend("Dekaaz");
 var mQuery = new Parse.Query(mDekaaz);
 mQuery.get(poemid, {
@@ -15,7 +18,9 @@ mQuery.get(poemid, {
 });
 
 
-
+//given an array of int's representing the number of syllables in each word,
+//return a boolean array representing the connections between each pair of dots
+//in the Dekaaz variation image.
 function decompose(syll_arr) {
 
 		var structure = new Array();
@@ -72,50 +77,13 @@ function decompose(syll_arr) {
 			}
 			console.log(bool);
 			return bool;
-
-			// for (var k=0;k<syll_arr.length;k++)
-			// {
-			// 	for (var k=0;k<syll_arr.length;k++)
-			// 	{
-			// 		for(var l=0;l<syll_arr[k] - 1;l++) {
-			// 			bool.push(true);
-			// 		}
-			// 		bool.push(false);
-			// 	}
-			// }
-
-			// console.log(bool);
-			// return null;
-
-			// var structure = new Array();
-			// structure[0] = 2;
-			// structure[1] = 3;
-			// structure[2] = 5;
-
-			// var current_index = 0;
-
-			// var solution = new Array();
-			// solution[0] = new Array();
-			// solution[1] = new Array();
-			// solution[2] = new Array();
-
-
-			// for (var i=0;i<syll_arr.length;i++)
-			// { 
-			// 	structure[current_index] -= syll_arr[i];
-			// 	solution[current_index][solution[current_index].length] = syll_arr[i];
-			// 	if(structure[current_index] == 0) {
-			// 		current_index++;
-			// 	}
-			// }
-			// console.log(solution);
-			// return solution;
 		
 	}
 
 /* 
 Dekaaz Saved to Database:
-Save a Dekaaz to the database, and update the Shared Dekaaz's to include this newly created Dekaaz 
+Save the edited Dekaaz to the database, and update the Dekaaz
+on the user's account page accordingly
 */
 $('#poem-submit').on('click', function(e) {
 
@@ -133,17 +101,14 @@ query.get(poemid, {
       return;
     }
 
-    // alert(decomposed_array);
 
   	object.set("syllarray", decomposed_array);
     object.set("Sound", soundFile);
-    // alert(object.get("line1"));
     object.save();
     alert("Thank you for submitting a Dekaaz!");
   },
 
   error: function(object, error) {
-    // error is an instance of Parse.Error.
   }
 });
 

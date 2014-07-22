@@ -249,6 +249,9 @@ var poemid = "<?php
         <!-- end copy/paste -->
       </div>
       </div>
+        <script>
+          var isEditing = true;
+        </script>
         <script type="text/javascript" src="utils.js"></script>
         <script type="text/javascript" src="home.js"></script>
         <script type="text/javascript" src="poemedit.js"></script>

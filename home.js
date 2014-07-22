@@ -1,6 +1,7 @@
 
 var numTimes = 0;
 
+if(isEditing == false) {
 YUI().use('node', function(Y) {
 	
 	var Dekaaz, 
@@ -173,7 +174,7 @@ YUI().use('node', function(Y) {
 
 	//Processing.reload();
 });
-
+}
 
 
 /* 

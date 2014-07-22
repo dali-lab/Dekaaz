@@ -2,22 +2,14 @@
 var numTimes = 0;
 
 
-
+//creates a paginator at the bottom of the page, 
+//so that only 100 Dekaaz's are shown on each page.
 function paginateDekaazs(num) {
-	// num = 100;
- //    var options = {
- //        currentPage: 3,
- //        totalPages: Math.ceil(num/10)
- //    }
+
  	$('.pagination ul').empty();
     var x = '<li><a href="javascript:goToPreviousPage()"><-</a></li>';
     $('.pagination ul').append(x);
- 	// x = '<li class="active" id="' + 1 + '"><a href="javascript:goToPage(1)">1</a></li>';
- 	// $('.pagination ul').append(x);
- 	// if(Math.floor(num/10) == 0) {
- 	// 	x = '<li class="active" id="1"><a href="javascript:goToPage(' + 1 + ')">' + 1 + '</a></li>';
-  // 		$('.pagination ul').append(x);
- 	// }
+
  	for (var i=1; i<=Math.ceil(num/100); i++)
   	{
   		if(i == 1) {
@@ -28,15 +20,15 @@ function paginateDekaazs(num) {
   		x = '<li id="' + i + '"><a href="javascript:goToPage(' + i + ')">' + i + '</a></li>';
  		$('.pagination ul').append(x);
   	}
-    // $('.pagination ul').append('<li class="disabled"><a href="#">...</a></li>');
+    
 	$('.pagination ul').append('<li><a href="javascript:goToAfterPage(' + Math.floor(num/10) + ')">-></a></li>');
-    // $('#example').bootstrapPaginator(options);
+    
     $('#incomplete-items li').slice(100).hide();
     $('#incomplete-items li').slice(0, 100).show();
 
-    // attachPaginationEvents(Math.ceil(num/10));
 }
 
+//displays the 100 Dekaaz's corresponding to the page number that was clicked in the paginator
 function goToPage(num) {
 	$('#incomplete-items li').slice(0, num*100-100).hide();
 	$('#incomplete-items li').slice(num*100-100, num*100).show();
@@ -46,6 +38,7 @@ function goToPage(num) {
 	
 }
 
+//displays the previous 100 Dekaaz's, when the left arrow button in the paginator is clicked
 function goToPreviousPage() {
 	var num = $('.active').attr('id');
 	if(num-1 >= 1) {
@@ -53,6 +46,7 @@ function goToPreviousPage() {
 	}
 }
 
+//displays the next 100 Dekaaz's, when the right arrow button in the paginator is clicked
 function goToAfterPage(maxnum) {
 	var num = parseInt($('.active:last').attr('id'));
 	if(num+1 <= maxnum) {
@@ -60,6 +54,7 @@ function goToAfterPage(maxnum) {
 	}
 }
 
+//make the paginator work
 function attachPaginationEvents(num) {
  	for (var i=1; i<=Math.floor(num/10); i++)
   	{
@@ -84,9 +79,10 @@ YUI().use('node', function(Y) {
 	input2 = $("#poem-input-2"),
 	input3 = $("#poem-input-3");
 
-	/* Top Navigation Bar: when the page is ready, get the current user's username, and pass the username to the 
-	script tag identified by '#account-info', which will generate HTML code. This HTML code is saved in the content
-	variable, which is prepended to the body */
+	/* 
+	The following code applies to the top navigation bar 
+	(Refer to the #account-info element in header.php for the HTML) 
+	*/
 	$(document).ready(function() {
 
 		var currentUser = Parse.User.current();
@@ -147,12 +143,6 @@ YUI().use('node', function(Y) {
 
 	function populate(val, owner_param, owner_id_param, child_num, role) {
 
-
-		// console.log(Parse.User.current().get('role'));
-		// if(Parse.User.current().get('role') != null) {
-		// 	console.log(Parse.User.current().get('role'));
-		// }
-
 		var syllarray = val.get("syllarray");
 		var num = 0;
 		for(var index_syllarray = 0; index_syllarray < syllarray.length; index_syllarray++) {
@@ -191,15 +181,6 @@ YUI().use('node', function(Y) {
 			} else {
 				$('#incomplete-items li:nth-child(' + child_num + ')').append(content);
 			}
-			// incompleteItemList.prepend(content);
-			
-			// Parse.User.current().fetch({
-		 //  	success: function(author) {
-		 //  		if(author.get('role') == 0) {
-		  			
-		 //  		}
-		 //  	  }
-		 //  	});
 		} else {
 			var audioHTML;
 			if(val.get('Sound') != null) {
@@ -350,7 +331,7 @@ YUI().use('node', function(Y) {
 			});
 		  },
 		  error: function(error) {
-		  	alert(error.message);
+		  	
 		  }
 		});
 

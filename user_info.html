@@ -22,15 +22,10 @@ Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8j
 </span>
 <span>
 # microposts
-  <!--<%= pluralize(current_user.microposts.count, "micropost") %>-->
 </span>
 <br/>
 <input type="button" id="FacebookLink" />
 <br/>
-
-
-
-
 
 
 	<!-- The feed that contains all the parse JS stuff, keys, etc-->
@@ -43,36 +38,4 @@ Parse.initialize("m5nklTTbXDmvXRxCiOMIt9SB6U0Iz2uKZ9AeGnXq", "8brbnvrjnVZiIsOk8j
 	} else {
 		$("#FacebookLink").attr("value", "Link To Facebook Account");
 	}
-/*
-function linkToFacebook() {
-
-	var user = Parse.User.current();	
-	// var query = new Parse.Query('User');
-
-	// // Now you'll compare your local object to database objects
-	// query.equalTo('objectId', user_id);
-	// query.find({
-	//     success: function(user) {
-
-	//     	var currentUser = user.get(0);
-
-	//     	Parse.User.logOut();
-
-	//     	Parse.FacebookUtils.link(currentUser, null, {
-	// 		    success: function(currentUser) {
-	// 		      alert("Woohoo, user logged in with Facebook!");
-	// 		    },
-	// 		    error: function(currentUser, error) {
-	// 		      alert("User cancelled the Facebook login or did not fully authorize.");
-	// 		    }
-	// 		  });
-			
-
-	//     	alert(user.length);
-	//     }
-	// });
-
-
-
-}*/
 </script>
