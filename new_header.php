@@ -16,7 +16,25 @@
   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
   <script src="https://croak.it/talk/croakit_talk.js"></script>
   <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+  <script src="tagcanvas.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="parse.js"></script>
+
+<script type="text/javascript">
+      window.onload = function() {
+        try {
+          TagCanvas.Start('myCanvas','tags',{
+            textColour: '#000000',
+            outlineColour: '#ffffff',
+            reverse: true,
+            depth: 0.8,
+            maxSpeed: 0.05
+          });
+        } catch(e) {
+          // something went wrong, hide the canvas container
+          document.getElementById('myCanvasContainer').style.display = 'none';
+        }
+      };
+    </script>
 
 
   <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
@@ -263,12 +281,12 @@ ul { padding: 0; }
     <li><a href="dekaaz.php">Collections</a></li>
     <li><a href="index.php" >Compose</a></li>-->
 
-    <li><a href="index.php">Home</a></li>
+    <li><a href="new_home.php">Home</a></li>
     <li><a href="index.php">Collections</a></li>
-    <li><a href="home.php" >Submit</a></li>
-    <li><a href="about.php" >Teach</a></li>
-    <li><a href="about.php">Game</a></li>
+    <li><a href="submit.php">Submit</a></li>
+ <li><a href="about.php" >Connect</a></li>
     <li><a href="about.php">Connect</a></li>
+    
 
 
     <!--<li><a href="#" onClick="logoutFunc()" id="logout-button">{message}</a></li>-->

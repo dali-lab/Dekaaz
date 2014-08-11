@@ -1,16 +1,77 @@
-<?php include_once("header.php"); ?>
-<h1><img src="images/dekaaz.png" style="padding-top: 10px; height: auto; max-width: 400px;"/></h1>
-  <div id="main" style="background-color: #F5F5F5; margin-bottom: 20px;">
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
 
-		
-		<div id="input-wrapper">
+  <title>Dekaaz</title>
+  <meta name="description" content="Dekaaz App">
+  <meta name="viewport" content="width=device-width">  
+
+<link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="css/twitter-bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+  <script type="text/javascript">var switchTo5x=true;</script>
+
+  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  <script src="https://croak.it/talk/croakit_talk.js"></script>
+  <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+  <script src="tagcanvas.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="parse.js"></script>
+
+<script type="text/javascript">
+      window.onload = function() {
+        try {
+          TagCanvas.Start('myCanvas','tags',{
+            textColour: '#000000',
+            outlineColour: '#ffffff',
+            reverse: true,
+            depth: 0.8,
+            maxSpeed: 0.05
+          });
+        } catch(e) {
+          // something went wrong, hide the canvas container
+          document.getElementById('myCanvasContainer').style.display = 'none';
+        }
+      };
+    </script>
+
+
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+
+  <script type="text/javascript">stLight.options({publisher: "3b8f0c68-515f-47b3-9466-8ea8a1762008", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+  <!-- popup iframe for edit button -->
+  <link rel="stylesheet" href="css/colorbox.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="js/jquery.colorbox.js"></script>
+
+  
+  
+  <!-- -->
+
+<!--  <script type="text/javascript" src="processing.js"></script>-->
+
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".dropdown-toggle").dropdown();
+});  
+</script>
+</head>
+<body>
+<img src="images/DekaazTransparent.png" style="width: 1500px; position: absolute; left:0; right:0; margin-left:auto; margin-right:auto; z-index: 10; margin-top: 100px;"/>
+ <div style="width: 500px; position: absolute; left:0; right:0; margin-top: 700px; margin-left: auto; margin-right:auto; z-index: 10;">
+
+		<div id="input-wrapper" style="position: absolute; margin-left: auto; margin-right: auto">
 			<!-- Everything wrapped inside the "dekaaz-maker" div specifies the input boxes into which the user can enter their dekaaz. Once the "poem-submit" button is clicked, the Dekaaz is saved to the Parse Database. Refer to "Dekaaz Saved to Database" section in "feed.js" to see how this is done. 
 
 			As the user types words into the input fields, there will be real-time updates in the "syll_count" div, giving the user feedback on how many syllables he/she has used so far. Refer to: "Syllable Counting Using Wordnik" section in the "feed.js" file for the code for syllable counting.
 			-->
 			<div id="dekaaz-maker" style="width: 100%; height: 150px;">
 			
-				<div style="width: 50%; margin-left: 10px; float: left !important; display: inline;">
+				<div style="width: 50%; height:100px; display: inline;">
 					<input type="text" id="poem-input-1" placeholder="Two Syllables" class="lines">
 			
 					<input type="text" id="poem-input-2" placeholder="Three Syllables" class="lines">
@@ -19,16 +80,14 @@
 					<br/>
 				</div>
 			
-				<div style="width: 40%; float: right !important; display: inline; text-align: right;" id="syll_count">0 syllables
+				<div style="width: 40%;  float: right; display: inline; text-align: right;" id="syll_count">0 syllables
 				</div>
 		
 			</div>
 			<div>
-        <div class="croaker" croakcb="1"></div>
-        <br/>
-				<div id="audio_div"></div>
-				<br/>
-        <input style="text-align: left !important;" type="button" id="poem-submit" value="Add">
+        <div class="croaker" croakcb="1" style="margin-top: 30px; float: left; width: 200px"></div>
+
+        <input style="margin-top: 30px; float: left; text-align: center !important; width: 100px" type="button" id="poem-submit" value="Add">
         
         <!-- end copy/paste -->
       </div>
@@ -153,5 +212,23 @@
 
           });
       </script>
-      </body>
+</div>
+
+    <div id="myCanvasContainer" style="position: relative;  border: 1px solid black">
+      <canvas width="1200" height="1200" id="myCanvas">
+        <p>Anything in here will be replaced on browsers that support the canvas element</p>
+      </canvas>
+    </div>
+    <div id="tags">
+      <ul>
+        <li><a href="/index.php"><image src="images/1.png"/></a></li>
+<li><a href="/index.php"><image src="images/2.png"/></a></li>
+<li><a href="/index.php"><image src="images/3.png"/></a></li>
+<li><a href="/index.php"><image src="images/4.png"/></a></li>
+<li><a href="/index.php"><image src="images/5.png"/></a></li>
+<li><a href="/index.php"><image src="images/6.png"/></a></li>
+<li><a href="/index.php"><image src="images/7.png"/></a></li>
+      </ul>
+    </div>
+  </body>
 </html>
